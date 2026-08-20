@@ -1,0 +1,662 @@
+/* ============================================================
+   DDW 学术站 — 公共样式（追加层）
+   依赖：style.css / bootstrap.min.css / fontawesome.all.min.css
+   本文件追加中文字体栈 + 学术站专属区块样式
+   ============================================================ */
+
+:root {
+  --ddw-primary: #0e4d8c;
+  /* 学术深蓝 */
+  --ddw-primary-dark: #0a3a6b;
+  --ddw-accent: #1f8a70;
+  /* 学术绿 */
+  --ddw-gold: #c9a227;
+  --ddw-bg-light: #f5f8fc;
+  --ddw-text: #2b3a4a;
+  --ddw-muted: #5b6b7b;
+  --ddw-border: #e2e8f0;
+}
+
+/* 中文字体栈（Poppins 仅覆盖拉丁/数字，中文回退系统字体） */
+body {
+  font-family: "Poppins", "Microsoft YaHei", "PingFang SC", "Noto Sans SC", "Helvetica Neue", Arial, sans-serif;
+  color: var(--ddw-text);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
+}
+
+/* ---------- 学术站顶部条 ---------- */
+.ddw-topbar {
+  background: var(--ddw-primary);
+  color: #fff;
+  padding: 10px 0;
+  font-size: 14px;
+}
+
+.ddw-topbar a {
+  color: #fff;
+}
+
+.ddw-topbar .lang-switch {
+  text-align: right;
+}
+
+.ddw-topbar .lang-switch a {
+  display: inline-block;
+  padding: 2px 12px;
+  border: 1px solid rgba(255, 255, 255, .5);
+  border-radius: 3px;
+  margin-left: 6px;
+  text-decoration: none;
+  transition: background .2s;
+}
+
+.ddw-topbar .lang-switch a:hover {
+  background: rgba(255, 255, 255, .15);
+}
+
+/* ---------- 学术站导航 ---------- */
+.ddw-nav {
+  background: #fff;
+  border-bottom: 1px solid var(--ddw-border);
+  box-shadow: 0 2px 8px rgba(14, 77, 140, .06);
+}
+
+.ddw-nav .navbar-brand {
+  font-weight: 700;
+  color: var(--ddw-primary);
+  font-size: 22px;
+}
+
+.ddw-nav .navbar-brand small {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ddw-muted);
+  letter-spacing: 1px;
+}
+
+.ddw-nav .nav-link {
+  color: var(--ddw-text);
+  font-weight: 500;
+  font-size: 15px;
+  padding: 12px 14px !important;
+}
+
+.ddw-nav .nav-link:hover,
+.ddw-nav .nav-link.active {
+  color: var(--ddw-primary);
+}
+
+/* ---------- 学术站页脚 ---------- */
+.ddw-footer {
+  background: #0b2540;
+  color: #c7d4e2;
+  padding: 50px 0 0;
+  font-size: 14px;
+}
+
+.ddw-footer h5 {
+  color: #fff;
+  font-size: 16px;
+  margin-bottom: 18px;
+}
+
+.ddw-footer p {
+  color: #fff;
+  margin-bottom: 18px;
+}
+
+.ddw-footer a {
+  color: #c7d4e2;
+  text-decoration: none;
+}
+
+.ddw-footer a:hover {
+  color: #fff;
+}
+
+.ddw-footer .footer-links li {
+  margin-bottom: 8px;
+}
+
+.ddw-footer .disclaimer {
+  background: rgba(255, 255, 255, .06);
+  border-left: 3px solid var(--ddw-gold);
+  padding: 14px 18px;
+  margin: 24px 0;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.ddw-footer .disclaimer strong {
+  color: var(--ddw-gold);
+}
+
+.ddw-footer .footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, .12);
+  padding: 16px 0;
+  margin-top: 30px;
+  font-size: 13px;
+  color: #8fa3b8;
+}
+
+/* ---------- 页面 Hero ---------- */
+.ddw-hero {
+  background: linear-gradient(135deg, var(--ddw-primary) 0%, var(--ddw-primary-dark) 100%);
+  color: #fff;
+  padding: 70px 0 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ddw-hero .eyebrow {
+  color: var(--ddw-gold);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.ddw-hero h1 {
+  font-size: 40px;
+  font-weight: 700;
+  margin: 12px 0 16px;
+  color: #fff;
+  line-height: 1.3;
+}
+
+.ddw-hero p {
+  font-size: 17px;
+  opacity: .92;
+  max-width: 720px;
+  line-height: 1.8;
+  color: #fff;
+}
+
+.ddw-hero .breadcrumb {
+  background: transparent;
+  margin: 16px 0 0;
+}
+
+.ddw-hero .breadcrumb a,
+.ddw-hero .breadcrumb-item {
+  color: rgba(255, 255, 255, .8);
+}
+
+.ddw-hero .breadcrumb-item.active {
+  color: #fff;
+}
+
+.ddw-hero .breadcrumb-item+.breadcrumb-item::before {
+  color: rgba(255, 255, 255, .5);
+}
+
+/* ---------- 区块通用 ---------- */
+.ddw-section {
+  padding: 60px 0;
+}
+
+.ddw-section.alt {
+  background: var(--ddw-bg-light);
+}
+
+.ddw-section .section-title {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--ddw-primary);
+  margin-bottom: 12px;
+}
+
+.ddw-section .section-eyebrow {
+  color: var(--ddw-accent);
+  letter-spacing: 2px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.ddw-section .section-sub {
+  color: var(--ddw-muted);
+  max-width: 760px;
+  line-height: 1.8;
+  margin-bottom: 30px;
+}
+
+/* ---------- 首页 Hero ---------- */
+.ddw-home-hero {
+  background: linear-gradient(135deg, #0a3a6b 0%, #0e4d8c 55%, #1565a8 100%);
+  color: #fff !important;
+  padding: 110px 0 90px;
+  position: relative;
+}
+
+.ddw-home-hero h1 {
+  font-size: 46px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.ddw-home-hero .lead {
+  font-size: 19px;
+  opacity: .92;
+  max-width: 680px;
+  line-height: 1.9;
+  margin-top: 18px;
+}
+
+.ddw-home-hero .hero-cta {
+  margin-top: 30px;
+}
+
+.ddw-home-hero .btn-ddw {
+  background: var(--ddw-gold);
+  color: #0b2540;
+  font-weight: 600;
+  padding: 12px 28px;
+  border-radius: 4px;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.ddw-home-hero .btn-ddw:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .25);
+}
+
+/* ---------- 核心数据条 ---------- */
+.ddw-stats {
+  background: #fff;
+  border-bottom: 1px solid var(--ddw-border);
+  padding: 40px 0;
+}
+
+.ddw-stat {
+  text-align: center;
+  padding: 20px;
+}
+
+.ddw-stat .num {
+  font-size: 46px;
+  font-weight: 700;
+  color: var(--ddw-primary);
+  line-height: 1;
+}
+
+.ddw-stat .label {
+  color: var(--ddw-muted);
+  font-size: 15px;
+  margin-top: 10px;
+  line-height: 1.6;
+}
+
+/* ---------- 四宫格 / 卡片 ---------- */
+.ddw-grid-card {
+  background: #fff;
+  border: 1px solid var(--ddw-border);
+  border-radius: 8px;
+  padding: 28px;
+  height: 100%;
+  transition: transform .25s, box-shadow .25s;
+}
+
+.ddw-grid-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(14, 77, 140, .12);
+}
+
+.ddw-grid-card .icon {
+  font-size: 34px;
+  color: var(--ddw-accent);
+  margin-bottom: 14px;
+}
+
+.ddw-grid-card h3 {
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--ddw-primary);
+  margin-bottom: 10px;
+}
+
+.ddw-grid-card p {
+  color: var(--ddw-muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.ddw-grid-card a.card-link {
+  color: var(--ddw-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* ---------- 专家证言卡 ---------- */
+.ddw-quote-card {
+  background: #fff;
+  border: 1px solid var(--ddw-border);
+  border-radius: 8px;
+  padding: 26px;
+  height: 100%;
+  position: relative;
+}
+
+.ddw-quote-card .quote-mark {
+  color: var(--ddw-gold);
+  font-size: 40px;
+  line-height: 1;
+  opacity: .5;
+}
+
+.ddw-quote-card .quote {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--ddw-text);
+  margin: 12px 0 18px;
+  font-style: italic;
+}
+
+.ddw-quote-card .expert {
+  display: flex;
+  align-items: center;
+}
+
+.ddw-quote-card .expert img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 14px;
+  border: 2px solid var(--ddw-border);
+}
+
+.ddw-quote-card .expert .name {
+  font-weight: 600;
+  color: var(--ddw-primary);
+}
+
+.ddw-quote-card .expert .role {
+  font-size: 13px;
+  color: var(--ddw-muted);
+}
+
+/* ---------- 时间轴 ---------- */
+.ddw-timeline {
+  position: relative;
+  padding-left: 30px;
+}
+
+.ddw-timeline::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--ddw-border);
+}
+
+.ddw-timeline .tl-item {
+  position: relative;
+  margin-bottom: 26px;
+}
+
+.ddw-timeline .tl-item::before {
+  content: "";
+  position: absolute;
+  left: -30px;
+  top: 6px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--ddw-accent);
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 2px var(--ddw-accent);
+}
+
+.ddw-timeline .tl-year {
+  font-weight: 700;
+  color: var(--ddw-primary);
+  font-size: 16px;
+}
+
+.ddw-timeline .tl-title {
+  font-weight: 600;
+  margin: 4px 0;
+}
+
+.ddw-timeline .tl-desc {
+  color: var(--ddw-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* ---------- FAQ 折叠 ---------- */
+.ddw-faq .card {
+  border: 1px solid var(--ddw-border);
+  margin-bottom: 12px;
+  border-radius: 6px;
+}
+
+.ddw-faq .card-header {
+  background: #fff;
+  padding: 0;
+}
+
+.ddw-faq .card-header .btn {
+  width: 100%;
+  text-align: left;
+  font-weight: 600;
+  color: var(--ddw-primary);
+  padding: 16px 20px;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.ddw-faq .card-header .btn .fa {
+  float: right;
+  color: var(--ddw-accent);
+}
+
+.ddw-faq .card-body {
+  color: var(--ddw-muted);
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+/* ---------- 论文列表 ---------- */
+.ddw-paper {
+  background: #fff;
+  border: 1px solid var(--ddw-border);
+  border-left: 4px solid var(--ddw-accent);
+  border-radius: 6px;
+  padding: 18px 22px;
+  margin-bottom: 14px;
+}
+
+.ddw-paper .paper-year {
+  display: inline-block;
+  background: var(--ddw-primary);
+  color: #fff;
+  font-size: 12px;
+  padding: 2px 10px;
+  border-radius: 3px;
+  margin-right: 8px;
+}
+
+.ddw-paper .paper-title {
+  font-weight: 600;
+  color: var(--ddw-text);
+  font-size: 15px;
+}
+
+.ddw-paper .paper-meta {
+  color: var(--ddw-muted);
+  font-size: 13px;
+  margin-top: 6px;
+  line-height: 1.7;
+}
+
+.ddw-paper .paper-links {
+  margin-top: 8px;
+}
+
+.ddw-paper .paper-links a {
+  font-size: 13px;
+  margin-right: 14px;
+  color: var(--ddw-primary);
+  text-decoration: none;
+}
+
+/* ---------- 图书卡 ---------- */
+.ddw-book {
+  background: #fff;
+  border: 1px solid var(--ddw-border);
+  border-radius: 8px;
+  overflow: hidden;
+  height: 100%;
+  transition: transform .25s, box-shadow .25s;
+}
+
+.ddw-book:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(14, 77, 140, .12);
+}
+
+.ddw-book .book-cover {
+  height: 300px;
+  background: linear-gradient(135deg, var(--ddw-primary), var(--ddw-accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 22px;
+  text-align: center;
+  padding: 20px;
+}
+
+.ddw-book .book-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ddw-book .book-body {
+  padding: 22px;
+}
+
+.ddw-book .book-body h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ddw-primary);
+}
+
+.ddw-book .book-body .publisher {
+  color: var(--ddw-muted);
+  font-size: 13px;
+  margin: 6px 0 12px;
+}
+
+.ddw-book .book-body p {
+  color: var(--ddw-muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* ---------- 联系信息卡 ---------- */
+.ddw-contact-card {
+  background: #fff;
+  border: 1px solid var(--ddw-border);
+  border-radius: 8px;
+  padding: 26px;
+  height: 100%;
+  text-align: center;
+}
+
+.ddw-contact-card .icon {
+  font-size: 32px;
+  color: var(--ddw-accent);
+  margin-bottom: 12px;
+}
+
+.ddw-contact-card h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ddw-primary);
+}
+
+.ddw-contact-card p {
+  color: var(--ddw-muted);
+  font-size: 14px;
+  margin: 8px 0 0;
+  line-height: 1.7;
+}
+
+/* ---------- 学术声明强调块 ---------- */
+.ddw-note {
+  background: #fff8e6;
+  border: 1px solid #f0e0b0;
+  border-left: 4px solid var(--ddw-gold);
+  padding: 16px 20px;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #6b5a1e;
+  margin: 24px 0;
+}
+
+/* ---------- 数据表格 ---------- */
+.ddw-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.ddw-table th,
+.ddw-table td {
+  border: 1px solid var(--ddw-border);
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.ddw-table th {
+  background: var(--ddw-primary);
+  color: #fff;
+  font-weight: 600;
+}
+
+.ddw-table tr:nth-child(even) {
+  background: var(--ddw-bg-light);
+}
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 768px) {
+  .ddw-home-hero h1 {
+    font-size: 32px;
+  }
+
+  .ddw-hero h1 {
+    font-size: 30px;
+  }
+
+  .ddw-section {
+    padding: 40px 0;
+  }
+
+  .ddw-section .section-title {
+    font-size: 24px;
+  }
+
+  .ddw-stat .num {
+    font-size: 36px;
+  }
+}

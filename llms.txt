@@ -1,0 +1,40 @@
+# DDW Science · 低氘水研究
+
+> 本网站为科学研究信息平台，内容仅用于学术交流与科学普及，不构成任何医疗建议或产品推荐。
+
+低氘水（Deuterium-Depleted Water, DDW）研究：自 1990 年首瓶人工低氘水以来，全球科学家围绕"氘的生物学作用"展开了长达 36 年的系统研究，形成了从基础机制到大样本真实世界数据的完整证据链。
+
+- 领域出版物总数：113 项（截至 2026 年，含论文·著作·专利）
+- 系统研究历程：36 年（自 1990 年首瓶人工低氘水）
+- 已发表同行评议论文：60 篇
+- 国际低氘大会（ICDD）：5 届（自 2010 年）
+
+## 页面导航
+
+- [首页](https://ddw-science.com/) — 低氘水研究概览
+- [关于低氘水](https://ddw-science.com/about-ddw.html) — 氘是什么、低氘水原理与安全性
+- [研究进展](https://ddw-science.com/research.html) — 36 年证据链总览
+- [论文解读](https://ddw-science.com/publications.html) — 60 篇论文中文解读索引
+- [图书介绍](https://ddw-science.com/books.html) — 两部中文著作档案
+- [学术会议](https://ddw-science.com/conferences.html) — ICDD 五届全记录
+- [科学家介绍](https://ddw-science.com/scientist.html) — Gabor Somlyai 学术履历
+- [联系我们](https://ddw-science.com/contact.html) — 学术合作、媒体采访、文献索取
+- [专家证言](https://ddw-science.com/experts.html) — 8 位国际科学家学术评价
+- [欧盟研究项目](https://ddw-science.com/eu-project.html) — Aqua-Synapse Horizon Europe
+- [应用研究方向](https://ddw-science.com/applications.html) — 运动、免疫、代谢健康
+
+## 关键概念
+
+- **氘（Deuterium, D）**：氢的天然同位素变体，原子核含一个质子与一个中子，质量约为氢的两倍。
+- **低氘水（DDW）**：氘含量显著低于天然水的水，通过工业蒸馏塔分馏工艺将氘含量降至 25–130 ppm。
+- **氘耗减（Deuterium Depletion）**：降低体内氘浓度的过程，是低氘水研究的核心概念。
+
+## 外部资源
+
+- [HYD 英文站](https://hyd.hu/en/) — HYD 官方英文网站
+- [Aqua-Synapse CORDIS 项目](https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/how-to-participate/org-details/999999999/project/101086453/program/43108390/details) — 欧盟项目官方信息
+- [国际低氘大会](https://deuteriumdepletion.com/) — ICDD 各届科学项目
+
+## 联系
+
+学术邮箱：research@ddw-science.com（学术合作、媒体采访、文献索取）

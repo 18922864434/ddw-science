@@ -1,0 +1,573 @@
+:root {
+    --hyd-home-shadow: 0 18px 48px rgba(16, 45, 53, 0.12);
+    --hyd-home-radius: 4px;
+}
+
+.hyd-home {
+    color: var(--color-text-main, #2e4650);
+    background: var(--color-bg-page, #f7fafa);
+}
+
+.hyd-home h1,
+.hyd-home h2,
+.hyd-home h3,
+.hyd-home p {
+    margin-top: 0;
+}
+
+.hyd-home h1,
+.hyd-home h2,
+.hyd-home h3 {
+    color: var(--color-text-title, #102d35);
+}
+
+.hyd-home-hero {
+    position: relative;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background-color: var(--color-bg-dark, #0b3440);
+    background-position: center;
+    background-size: cover;
+}
+
+.hyd-home-hero-overlay,
+.hyd-home-product-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(11, 52, 64, 0.86), rgba(11, 52, 64, 0.3));
+}
+
+.hyd-home-hero-inner {
+    position: relative;
+    z-index: 1;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    color: #fff;
+}
+
+.hyd-home-hero h1 {
+    max-width: 760px;
+    margin-bottom: 22px;
+    color: #fff;
+    font-size: clamp(2.5rem, 5.2vw, 5rem);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+}
+
+.hyd-home-kicker {
+    margin-bottom: 18px;
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.34em;
+}
+
+.hyd-home-signature {
+    margin-bottom: 34px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.08rem;
+}
+
+.hyd-home-section {
+    padding: 92px 0;
+}
+
+.hyd-home-intro,
+.hyd-home-congress {
+    background: var(--color-bg-section, #edf6f6);
+}
+
+.hyd-home-intro h2,
+.hyd-home-statements h2,
+.hyd-home-congress h2,
+.hyd-home-news h2,
+.hyd-home-product h2 {
+    margin-bottom: 22px;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    line-height: 1.15;
+}
+
+.hyd-home-eyebrow {
+    margin-bottom: 12px;
+    color: var(--color-primary, #0e6674);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.hyd-home-eyebrow-light {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.hyd-home-lead {
+    margin-bottom: 18px;
+    color: var(--color-text-main, #2e4650);
+    font-size: 1rem;
+    line-height: 1.85;
+}
+
+.hyd-home-button,
+.hyd-home-text-link {
+    transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.hyd-home-button {
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 12px 24px;
+    border: 1px solid var(--color-primary, #0e6674);
+    border-radius: 999px;
+    color: #fff;
+    background: var(--color-primary, #0e6674);
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.hyd-home-button:hover,
+.hyd-home-button:focus-visible {
+    color: #fff;
+    background: var(--color-primary-hover, #0a5260);
+    transform: translateY(-2px);
+}
+
+.hyd-home-button-light {
+    border-color: #fff;
+    background: #fff;
+    color: var(--color-primary-active, #073e49);
+}
+
+.hyd-home-button-light:hover,
+.hyd-home-button-light:focus-visible {
+    border-color: var(--color-primary-soft, #d9f0f1);
+    background: var(--color-primary-soft, #d9f0f1);
+    color: var(--color-primary-active, #073e49);
+}
+
+.hyd-home-text-link {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    color: var(--color-primary, #0e6674);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.hyd-home-text-link:hover,
+.hyd-home-text-link:focus-visible {
+    color: var(--color-primary-hover, #0a5260);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.hyd-home-section-heading {
+    margin-bottom: 42px;
+    text-align: center;
+}
+
+.hyd-home-section-heading h2 {
+    margin-bottom: 0;
+}
+
+.hyd-home-section-heading-row {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 24px;
+    text-align: left;
+}
+
+.hyd-home-expert-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.hyd-home-expert-card {
+    min-height: 100%;
+    padding: 26px 22px;
+    border: 1px solid rgba(14, 102, 116, 0.12);
+    border-radius: var(--hyd-home-radius);
+    background: var(--color-bg-card, #fff);
+    box-shadow: 0 8px 26px rgba(16, 45, 53, 0.06);
+}
+
+.hyd-home-quote-mark {
+    height: 34px;
+    color: var(--color-primary, #0e6674);
+    font-family: Georgia, serif;
+    font-size: 3.5rem;
+    line-height: 0.9;
+}
+
+.hyd-home-expert-card blockquote {
+    min-height: 168px;
+    margin: 0 0 24px;
+    color: var(--color-text-main, #2e4650);
+    font-size: 0.9rem;
+    line-height: 1.75;
+}
+
+.hyd-home-expert-person {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.hyd-home-expert-person img {
+    width: 54px;
+    height: 54px;
+    flex: 0 0 54px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.hyd-home-expert-person h3 {
+    margin-bottom: 4px;
+    font-size: 0.9rem;
+    line-height: 1.35;
+}
+
+.hyd-home-expert-person p {
+    margin-bottom: 0;
+    color: var(--color-text-secondary, #526970);
+    font-size: 0.75rem;
+    line-height: 1.4;
+}
+
+.hyd-home-statements {
+    background: var(--color-bg-card, #fff);
+}
+
+.hyd-home-feature-image,
+.hyd-home-congress-image {
+    display: block;
+    width: 100%;
+    max-height: 420px;
+    border-radius: var(--hyd-home-radius);
+    object-fit: cover;
+    box-shadow: var(--hyd-home-shadow);
+}
+
+.hyd-home-video-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 28px;
+}
+
+.hyd-home-video-card {
+    display: block;
+    overflow: hidden;
+    border-radius: var(--hyd-home-radius);
+    background: var(--color-bg-section, #edf6f6);
+    color: var(--color-text-title, #102d35);
+    text-decoration: none;
+}
+
+.hyd-home-video-card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 350 / 197;
+    object-fit: cover;
+}
+
+.hyd-home-video-card span {
+    display: block;
+    padding: 12px 14px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    line-height: 1.45;
+}
+
+.hyd-home-video-card:hover,
+.hyd-home-video-card:focus-visible {
+    color: var(--color-primary, #0e6674);
+    box-shadow: 0 0 0 3px var(--color-primary-soft, #d9f0f1);
+}
+
+.hyd-home-product {
+    position: relative;
+    min-height: 560px;
+    overflow: hidden;
+    color: #fff;
+    background: var(--color-bg-dark, #0b3440);
+}
+
+.hyd-home-product-track,
+.hyd-home-product-slide {
+    position: absolute;
+    inset: 0;
+}
+
+.hyd-home-product-slide {
+    display: flex;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    background-position: center;
+    background-size: cover;
+    transition: visibility 400ms ease, opacity 400ms ease;
+}
+
+.hyd-home-product-slide.is-active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.hyd-home-product-content {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    padding-top: 72px;
+    padding-bottom: 130px;
+}
+
+.hyd-home-product-content h2,
+.hyd-home-product-content p {
+    color: #fff;
+}
+
+.hyd-home-product-content p:not(.hyd-home-eyebrow) {
+    max-width: 620px;
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+.hyd-home-product-controls {
+    position: absolute;
+    right: 0;
+    bottom: 34px;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.hyd-home-product-tab {
+    padding: 10px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 999px;
+    color: #fff;
+    background: rgba(11, 52, 64, 0.35);
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.hyd-home-product-tab:hover,
+.hyd-home-product-tab:focus-visible,
+.hyd-home-product-tab.is-active {
+    border-color: #fff;
+    background: #fff;
+    color: var(--color-primary-active, #073e49);
+}
+
+.hyd-home-congress-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px 28px;
+    margin-top: 28px;
+}
+
+.hyd-home-news {
+    background: var(--color-bg-card, #fff);
+}
+
+.hyd-home-news-card {
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid rgba(14, 102, 116, 0.12);
+    border-radius: var(--hyd-home-radius);
+    background: var(--color-bg-card, #fff);
+    box-shadow: 0 8px 26px rgba(16, 45, 53, 0.06);
+}
+
+.hyd-home-news-image {
+    display: block;
+    overflow: hidden;
+    background: var(--color-bg-section, #edf6f6);
+}
+
+.hyd-home-news-image img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 830 / 332;
+    object-fit: cover;
+    transition: transform 400ms ease;
+}
+
+.hyd-home-news-card:hover .hyd-home-news-image img {
+    transform: scale(1.04);
+}
+
+.hyd-home-news-body {
+    padding: 22px 24px 26px;
+}
+
+.hyd-home-news-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+    color: var(--color-text-secondary, #526970);
+    font-size: 0.73rem;
+}
+
+.hyd-home-news-body h3 {
+    margin-bottom: 12px;
+    font-size: 1.2rem;
+    line-height: 1.4;
+}
+
+.hyd-home-news-body h3 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.hyd-home-news-body h3 a:hover,
+.hyd-home-news-body h3 a:focus-visible {
+    color: var(--color-primary, #0e6674);
+}
+
+.hyd-home-news-body > p:last-child {
+    margin-bottom: 0;
+    color: var(--color-text-secondary, #526970);
+    font-size: 0.88rem;
+    line-height: 1.7;
+}
+
+.hyd-home-empty {
+    padding: 30px;
+    text-align: center;
+    color: var(--color-text-secondary, #526970);
+}
+
+.hyd-home a:focus-visible,
+.hyd-home button:focus-visible {
+    outline: 3px solid var(--color-accent, #c5343c);
+    outline-offset: 3px;
+}
+
+@media (max-width: 1199px) {
+    .hyd-home-expert-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 991px) {
+    .hyd-home-hero {
+        min-height: 540px;
+    }
+
+    .hyd-home-section {
+        padding: 72px 0;
+    }
+
+    .hyd-home-intro h2,
+    .hyd-home-statements h2,
+    .hyd-home-congress h2 {
+        margin-bottom: 18px;
+    }
+
+    .hyd-home-feature-image,
+    .hyd-home-congress-image {
+        max-height: 340px;
+        margin-bottom: 34px;
+    }
+
+    .hyd-home-expert-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 575px) {
+    .hyd-home-hero {
+        min-height: 500px;
+    }
+
+    .hyd-home-hero-inner {
+        padding-top: 54px;
+        padding-bottom: 54px;
+    }
+
+    .hyd-home-kicker {
+        font-size: 0.88rem;
+        letter-spacing: 0.24em;
+    }
+
+    .hyd-home-section {
+        padding: 58px 0;
+    }
+
+    .hyd-home-section-heading-row {
+        display: block;
+    }
+
+    .hyd-home-section-heading-row .hyd-home-text-link {
+        margin-top: 18px;
+    }
+
+    .hyd-home-expert-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hyd-home-expert-card blockquote {
+        min-height: 0;
+    }
+
+    .hyd-home-video-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hyd-home-product {
+        min-height: 590px;
+    }
+
+    .hyd-home-product-content {
+        padding-top: 54px;
+        padding-bottom: 150px;
+    }
+
+    .hyd-home-product-controls {
+        bottom: 24px;
+    }
+
+    .hyd-home-product-tab {
+        flex: 1 1 100%;
+        text-align: left;
+    }
+
+    .hyd-home-congress-links {
+        display: block;
+    }
+
+    .hyd-home-congress-links .hyd-home-text-link {
+        margin-bottom: 14px;
+    }
+
+    .hyd-home-news-meta {
+        display: block;
+    }
+
+    .hyd-home-news-meta span {
+        display: block;
+        margin-bottom: 4px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hyd-home *,
+    .hyd-home *::before,
+    .hyd-home *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
