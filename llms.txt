@@ -6,7 +6,7 @@
 
 - 领域出版物总数：113 项（截至 2026 年，含论文·著作·专利）
 - 系统研究历程：36 年（自 1990 年首瓶人工低氘水）
-- 已发表同行评议论文：60 篇
+- 已发表同行评议论文：约 60 篇（本站收录 46 篇）
 - 国际低氘大会（ICDD）：5 届（自 2010 年）
 
 ## 页面导航
@@ -14,7 +14,7 @@
 - [首页](https://ddw-science.com/) — 低氘水研究概览
 - [关于低氘水](https://ddw-science.com/about-ddw.html) — 氘是什么、低氘水原理与安全性
 - [研究进展](https://ddw-science.com/research.html) — 36 年证据链总览
-- [论文解读](https://ddw-science.com/publications.html) — 60 篇论文中文解读索引
+- [论文解读](https://ddw-science.com/publications.html) — 约 60 篇论文中文解读索引（本站收录 46 篇）
 - [图书介绍](https://ddw-science.com/books.html) — 两部中文著作档案
 - [学术会议](https://ddw-science.com/conferences.html) — ICDD 五届全记录
 - [科学家介绍](https://ddw-science.com/scientist.html) — Gabor Somlyai 学术履历

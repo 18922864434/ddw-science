@@ -4,10 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>低氘水研究（DDW）| 一个持续了半个世纪的科学探索</title>
-  <meta name="description" content="低氘水（DDW）研究：自 1990 年首瓶人工低氘水以来的系统科学探索。113 项出版物、36 年研究历程、60 篇同行评议论文、5 届国际低氘大会（ICDD）。">
+  <meta name="description" content="低氘水（DDW）研究：自 1990 年首瓶人工低氘水以来的系统科学探索。113 项出版物、36 年研究历程、约 60 篇同行评议论文、5 届国际低氘大会（ICDD）。">
   <meta name="keywords" content="低氘水,DDW,氘耗减,低氘生物学,deuterium-depleted water,deuterium depletion,Gabor Somlyai,HYD">
   <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <link rel="canonical" href="https://ddw-science.com/">
+  <meta name="author" content="HYD LLC">
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
+  <link rel="alternate" hreflang="zh-CN" href="https://ddw-science.com/">
+  <!-- hreflang en 预留：英文版上线后启用 -->
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
@@ -31,6 +35,54 @@
     "url": "https://ddw-science.com/",
     "founder": { "@type": "Person", "name": "Gabor Somlyai" },
     "description": "致力于氘耗减（Deuterium Depletion）研究与药物开发的科研机构。"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "什么是氘？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "氘（Deuterium，符号 D）又称重氢，是氢的天然同位素变体。氢原子核含有一个质子，而氘原子核同时含有一个质子和一个中子。由于存在约两倍的质量差异，氢和氘在物理和化学行为上存在重大差异。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "什么是低氘水（DDW）？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "低氘水（Deuterium-Depleted Water, DDW）是指氘含量显著低于天然水的水。根据制备工艺不同，氘含量可降至 125 ppm、105 ppm 直至 25 ppm 水平。在温带气候区，天然水中的氘含量约为 140–150 ppm。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "低氘水与重水有什么区别？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "低氘水完全不是重水：重水（D₂O）氘含量 >99.8%，高浓度有毒，属核工业用品；低氘水氘含量 25–125 ppm。二者方向相反——重水是加氘，低氘水是减氘。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "低氘水是怎么制备的？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "低氘水的生产基于普通水（H₂O）和重水（D₂O）不同的物理化学特性，两者存在约 1.5°C 的沸点差。通过在工业规模蒸馏塔中多次重复蒸发，可将水的氘含量降至 25–110 ppm 水平。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "低氘水安全吗？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "氘是氢的稳定（非放射性）同位素。低氘水不含放射性物质，其氘含量处于天然水氘含量范围内或略低，全球已有多年使用与研究历史。相关内容仅供学术交流，不构成医疗建议。"
+        }
+      }
+    ]
   }
   </script>
 </head>
@@ -96,25 +148,25 @@
     <div class="row">
       <div class="col-md-3 col-6">
         <div class="ddw-stat">
-          <div class="num">113</div>
+          <div class="num" data-count="113">113</div>
           <div class="label">领域出版物总数<br>（截至 2026 年，含论文·著作·专利）</div>
         </div>
       </div>
       <div class="col-md-3 col-6">
         <div class="ddw-stat">
-          <div class="num">36</div>
+          <div class="num" data-count="36">36</div>
           <div class="label">年系统研究历程<br>（自 1990 年首瓶人工低氘水）</div>
         </div>
       </div>
       <div class="col-md-3 col-6">
         <div class="ddw-stat">
-          <div class="num">60</div>
+          <div class="num" data-count="60">60</div>
           <div class="label">篇全球已发表<br>低氘水同行评议研究论文</div>
         </div>
       </div>
       <div class="col-md-3 col-6">
         <div class="ddw-stat">
-          <div class="num">5</div>
+          <div class="num" data-count="5">5</div>
           <div class="label">届国际低氘大会（ICDD）<br>自 2010 年起举办</div>
         </div>
       </div>
@@ -186,9 +238,19 @@
             <div class="tl-desc">发表氘耗减在前列腺癌中的 II 期随机对照试验研究。</div>
           </div>
           <div class="tl-item">
+            <div class="tl-year">2013</div>
+            <div class="tl-title">乳腺癌回顾性研究</div>
+            <div class="tl-desc">发表 232 例乳腺癌患者回顾性生存研究，早期患者中位生存期达 217 个月。</div>
+          </div>
+          <div class="tl-item">
             <div class="tl-year">2015</div>
             <div class="tl-title">GMP 认证与 EMA 注册</div>
             <div class="tl-desc">生产场地获得 GMP 资格，低氘水作为活性成分在欧洲药品管理局（EMA）系统注册。</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2021</div>
+            <div class="tl-title">胰腺癌与 GLU T4 研究</div>
+            <div class="tl-desc">发表 86 例胰腺癌回顾性研究（MST 19.6 vs 6.36 月）与 GLUT4 转位机制研究。</div>
           </div>
           <div class="tl-item">
             <div class="tl-year">2023</div>
@@ -230,7 +292,7 @@
         <div class="ddw-grid-card">
           <div class="icon"><i class="fas fa-file-alt"></i></div>
           <h3>论文解读</h3>
-          <p>60 篇已发表同行评议论文的中文解读索引，含里程碑论文精选。</p>
+          <p>约 60 篇已发表同行评议论文，本站收录 46 篇中文解读索引，含里程碑论文精选。</p>
           <a class="card-link" href="publications.html">查看论文 <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
@@ -266,7 +328,7 @@
           <div class="quote-mark"><i class="fas fa-quote-left"></i></div>
           <p class="quote">我相信，人们很快会意识到，水是我们最重要的食物和饮品，也是维系生命的重要元素。因此，选择合适的水至关重要。</p>
           <div class="expert">
-            <img src="assets/img/d778565f6349f2c551f7.jpg" alt="Roman Zubarev 教授">
+            <img loading="lazy" decoding="async" src="assets/img/d778565f6349f2c551f7.jpg" alt="Roman Zubarev 教授">
             <div>
               <div class="name">Roman Zubarev 教授</div>
               <div class="role">瑞典斯德哥尔摩卡罗琳斯卡学院</div>
@@ -279,9 +341,9 @@
           <div class="quote-mark"><i class="fas fa-quote-left"></i></div>
           <p class="quote">氘代谢组学涵盖氘相关的生理学与生物化学。医生有责任理解这些机制，因为它们确实存在，并持续影响着人体的代谢过程。</p>
           <div class="expert">
-            <img src="assets/img/47b2206324545393315d.jpg" alt="Boros G. László 教授">
+            <img loading="lazy" decoding="async" src="assets/img/47b2206324545393315d.jpg" alt="László G. Boros 教授">
             <div>
-              <div class="name">Boros G. László 教授</div>
+              <div class="name">László G. Boros 教授</div>
               <div class="role">美国洛杉矶</div>
             </div>
           </div>
@@ -292,7 +354,7 @@
           <div class="quote-mark"><i class="fas fa-quote-left"></i></div>
           <p class="quote">一旦我们从分子层面充分理解这一机制，这一领域将迎来快速发展，因为它蕴含着巨大的潜力。多年从事代谢研究的经历，使我对此深信不疑。</p>
           <div class="expert">
-            <img src="assets/img/2d9c526b69f5c9a0ea9b.jpg" alt="Marta Cascante 教授">
+            <img loading="lazy" decoding="async" src="assets/img/2d9c526b69f5c9a0ea9b.jpg" alt="Marta Cascante 教授">
             <div>
               <div class="name">Marta Cascante 教授</div>
               <div class="role">西班牙巴塞罗那大学</div>

@@ -5,7 +5,8 @@
   "authors": "Beáta Zs Kovács、Ildikó Somlyai、András Papp、Gabor Somlyai",
   "journal": "国际临床和医学病例报告杂志，第 5 卷，第 06 期",
   "cat": "肿瘤生物学",
-  "pdf": "https://assets.ctfassets.net/e0h7lzmer4zr/K3wXiAoo4eKRO5ZpM7JWG/34ed9ccacda73abbeb73bec4373a84dd/ICMCRJ-5-2054.pdf"
+  "pdf": "https://assets.ctfassets.net/e0h7lzmer4zr/K3wXiAoo4eKRO5ZpM7JWG/34ed9ccacda73abbeb73bec4373a84dd/ICMCRJ-5-2054.pdf",
+  "slug": ""
  },
  {
   "year": 2026,
@@ -14,7 +15,8 @@
   "journal": "Int. J. Mol. Sci., 27, 2605",
   "cat": "肿瘤生物学",
   "doi": "10.3390/ijms27062605",
-  "pdf": "https://www.mdpi.com/1422-0067/27/6/2605/pdf"
+  "pdf": "https://www.mdpi.com/1422-0067/27/6/2605/pdf",
+  "slug": "2024-a549-dual"
  },
  {
   "year": 2025,
@@ -22,7 +24,8 @@
   "authors": "Gabor Somlyai、Beáta Zs. Kovács、András Papp、Ildikó Somlyai",
   "journal": "国际临床和医学病例报告杂志，4(12):1-8",
   "cat": "肿瘤生物学",
-  "pdf": "https://assets.ctfassets.net/e0h7lzmer4zr/5TrtTOVgoTIAhbCgl8NkFb/6fff2ea50eaee9804a52ff90c7c8dcaf/ICMCRJ-4-1943.pdf"
+  "pdf": "https://assets.ctfassets.net/e0h7lzmer4zr/5TrtTOVgoTIAhbCgl8NkFb/6fff2ea50eaee9804a52ff90c7c8dcaf/ICMCRJ-4-1943.pdf",
+  "slug": ""
  },
  {
   "year": 2025,
@@ -31,7 +34,8 @@
   "journal": "Int. J. Mol. Sci. 26(22), 10969",
   "cat": "肿瘤生物学",
   "doi": "10.3390/ijms262210969",
-  "pdf": "https://www.mdpi.com/1422-0067/26/22/10969/pdf"
+  "pdf": "https://www.mdpi.com/1422-0067/26/22/10969/pdf",
+  "slug": "2024-lung-adenocarcinoma"
  },
  {
   "year": 2025,
@@ -40,7 +44,8 @@
   "journal": "Biomedicines 13(4), 876",
   "cat": "肿瘤生物学",
   "doi": "10.3390/biomedicines13040876",
-  "pdf": "https://www.mdpi.com/2227-9059/13/4/876/pdf"
+  "pdf": "https://www.mdpi.com/2227-9059/13/4/876/pdf",
+  "slug": "2025-rwd-2649"
  },
  {
   "year": 2024,
@@ -49,7 +54,8 @@
   "journal": "自然科学，16(11):233-240",
   "cat": "代谢与糖尿病",
   "doi": "10.4236/ns.2024.1611017",
-  "pdf": "https://www.scirp.org/pdf/ns20241611_18303721.pdf"
+  "pdf": "https://www.scirp.org/pdf/ns20241611_18303721.pdf",
+  "slug": "2024-breath-test"
  },
  {
   "year": 2024,
@@ -57,7 +63,8 @@
   "authors": "Beáta Zs. Kovács、András Papp、Ildikó Somlyai、Gabor Somlyai",
   "journal": "临床评论和病例报告杂志，9(11):01-07",
   "cat": "肿瘤生物学",
-  "pdf": "https://www.opastpublishers.com/open-access-articles/clinical-impact-of-deuterium-depletion-on-survival-outcomes-in-pancreatic-cancer.pdf"
+  "pdf": "https://www.opastpublishers.com/open-access-articles/clinical-impact-of-deuterium-depletion-on-survival-outcomes-in-pancreatic-cancer.pdf",
+  "slug": ""
  },
  {
   "year": 2023,
@@ -65,7 +72,8 @@
   "authors": "Beáta Zs Kovács、András Papp、Ildikó Somlyai、Gabor Somlyai",
   "journal": "临床与医疗病例报告开放杂志，9(33):2121",
   "cat": "肿瘤生物学",
-  "pdf": "https://jclinmedcasereports.com/articles/OJCMCR-2121.pdf"
+  "pdf": "https://jclinmedcasereports.com/articles/OJCMCR-2121.pdf",
+  "slug": ""
  },
  {
   "year": 2023,
@@ -74,7 +82,8 @@
   "journal": "Biomedicines, 11, 1989",
   "cat": "肿瘤生物学",
   "doi": "10.3390/biomedicines11071989",
-  "pdf": "https://www.mdpi.com/2227-9059/11/7/1989/pdf"
+  "pdf": "https://www.mdpi.com/2227-9059/11/7/1989/pdf",
+  "slug": "2023-glioblastoma"
  },
  {
   "year": 2023,
@@ -83,7 +92,8 @@
   "journal": "分子生物学当前问题，45, 66-77",
   "cat": "肿瘤生物学",
   "doi": "10.3390/cimb45010005",
-  "pdf": "https://www.mdpi.com/1467-3045/45/1/5/pdf"
+  "pdf": "https://www.mdpi.com/1467-3045/45/1/5/pdf",
+  "slug": ""
  },
  {
   "year": 2022,
@@ -92,7 +102,8 @@
   "journal": "癌症控制，29:1-11",
   "cat": "肿瘤生物学",
   "doi": "10.1177/10732748211068963",
-  "pdf": "https://journals.sagepub.com/doi/pdf/10.1177/10732748211068963"
+  "pdf": "https://journals.sagepub.com/doi/pdf/10.1177/10732748211068963",
+  "slug": "2022-gene-expression"
  },
  {
   "year": 2021,
@@ -100,7 +111,8 @@
   "authors": "Beáta Zs Kovács、Ildikó Somlyai、András Papp、Gabor Somlyai",
   "journal": "临床评论和病例报告杂志，6(10):747-749",
   "cat": "肿瘤生物学",
-  "pdf": "https://opastonline.com/open-access/deuterium-depleted-water-delayed-hormone-therapy-of-prostate-cancer.pdf"
+  "pdf": "https://opastonline.com/open-access/deuterium-depleted-water-delayed-hormone-therapy-of-prostate-cancer.pdf",
+  "slug": ""
  },
  {
   "year": 2021,
@@ -108,7 +120,8 @@
   "authors": "Gabor Somlyai、Ildikó Somlyai、István Fórizs、György Czuppon、András Papp、Miklós Molnár",
   "journal": "分子科学主要档案：第二版，1-20",
   "cat": "代谢与糖尿病",
-  "pdf": "https://videleaf.com/wp-content/uploads/2021/09/Effect-of-Systemic-Subnormal-Deuterium-Level-on-Metabolic-Syndrome-Related-and-other-Blood-Parameters-in-Humans-A-Preliminary-Study.pdf"
+  "pdf": "https://videleaf.com/wp-content/uploads/2021/09/Effect-of-Systemic-Subnormal-Deuterium-Level-on-Metabolic-Syndrome-Related-and-other-Blood-Parameters-in-Humans-A-Preliminary-Study.pdf",
+  "slug": ""
  },
  {
   "year": 2021,
@@ -117,7 +130,8 @@
   "journal": "分子和细胞生物化学，476:4507-4516",
   "cat": "代谢与糖尿病",
   "doi": "10.1007/s11010-021-04231-0",
-  "pdf": "https://link.springer.com/content/pdf/10.1007/s11010-021-04231-0.pdf"
+  "pdf": "https://link.springer.com/content/pdf/10.1007/s11010-021-04231-0.pdf",
+  "slug": "2021-glut4-glucose"
  },
  {
   "year": 2021,
@@ -125,7 +139,8 @@
   "authors": "Beáta Zs Kovács、Ildikó Somlyai、András Papp、Gabor Somlyai",
   "journal": "临床评论和病例报告杂志，6(9):724-728",
   "cat": "免疫与内分泌",
-  "pdf": "https://opastonline.com/open-access/cause-and-effect-relationship-between-application-of-deuterium-depleted-water-and-improvement-of-chronic-lymphocytic-leukemia.pdf"
+  "pdf": "https://opastonline.com/open-access/cause-and-effect-relationship-between-application-of-deuterium-depleted-water-and-improvement-of-chronic-lymphocytic-leukemia.pdf",
+  "slug": ""
  },
  {
   "year": 2021,
@@ -134,7 +149,8 @@
   "journal": "癌症研究与治疗杂志，9(2):12-19",
   "cat": "肿瘤生物学",
   "doi": "10.14312/2052-4994.2021-2",
-  "pdf": "https://nobleresearch.org/Content/PDF/1/2052-4994.2021-2/2052-4994.2021-2.pdf"
+  "pdf": "https://nobleresearch.org/Content/PDF/1/2052-4994.2021-2/2052-4994.2021-2.pdf",
+  "slug": "2021-lung-cancer"
  },
  {
   "year": 2021,
@@ -143,7 +159,8 @@
   "journal": "癌症控制，28:1-12",
   "cat": "肿瘤生物学",
   "doi": "10.1177/1073274821999655",
-  "pdf": "https://journals.sagepub.com/doi/pdf/10.1177/1073274821999655"
+  "pdf": "https://journals.sagepub.com/doi/pdf/10.1177/1073274821999655",
+  "slug": "2021-pancreatic-cancer"
  },
  {
   "year": 2021,
@@ -152,7 +169,8 @@
   "journal": "PLOS ONE, 16:3, 1-17",
   "cat": "代谢与糖尿病",
   "doi": "10.1371/journal.pone.0243517",
-  "pdf": "https://journals.plos.org/plosone/article"
+  "pdf": "https://journals.plos.org/plosone/article",
+  "slug": "2021-ecoli-mutation"
  },
  {
   "year": 2020,
@@ -161,7 +179,8 @@
   "journal": "分子，25, 1376",
   "cat": "代谢与糖尿病",
   "doi": "10.3390/molecules25061376",
-  "pdf": "assets/pdf/47aafb40afa227281e3b.pdf"
+  "pdf": "assets/pdf/47aafb40afa227281e3b.pdf",
+  "slug": "2020-metabolic-syndrome"
  },
  {
   "year": 2017,
@@ -169,7 +188,8 @@
   "authors": "Gabor Somlyai、T. Que Collins、Emmanuelle J. Meuillet、Patel Hitendra、Dominic P. D'Agostino、László G. Boros",
   "journal": "肿瘤靶点",
   "cat": "肿瘤生物学",
-  "pdf": "assets/pdf/69f2eb205a802e368cc6.pdf"
+  "pdf": "assets/pdf/69f2eb205a802e368cc6.pdf",
+  "slug": ""
  },
  {
   "year": 2017,
@@ -178,7 +198,8 @@
   "journal": "神经肿瘤学 XX(XX), 1-2",
   "cat": "抗衰老与神经",
   "doi": "10.1093/neeonc/now284",
-  "pdf": "assets/pdf/418cd6a41d542949037b.pdf"
+  "pdf": "assets/pdf/418cd6a41d542949037b.pdf",
+  "slug": ""
  },
  {
   "year": 2016,
@@ -186,7 +207,8 @@
   "authors": "G. Somlyai、B. Javaheri、H. Davari、Z. Gyöngyi、I. Somlyai、K.A. Tamaden、L.G. Boros",
   "journal": "生物大分子. J., 2(1):1-7",
   "cat": "肿瘤生物学",
-  "pdf": "assets/pdf/92d3dd7d9ab69c3a6016.pdf"
+  "pdf": "assets/pdf/92d3dd7d9ab69c3a6016.pdf",
+  "slug": ""
  },
  {
   "year": 2016,
@@ -194,7 +216,8 @@
   "authors": "László G. Boros、Gabor Somlyai、T. Que Collins、Hitendra Patel、Richard D. Beger",
   "journal": "细胞代谢，23:635-648",
   "cat": "代谢与糖尿病",
-  "pdf": "assets/pdf/2ad559aceda1565fd463.pdf"
+  "pdf": "assets/pdf/2ad559aceda1565fd463.pdf",
+  "slug": ""
  },
  {
   "year": 2016,
@@ -203,7 +226,8 @@
   "journal": "医学假设 87, 69-74",
   "cat": "肿瘤生物学",
   "doi": "10.1016/j.mehy.2015.11.016",
-  "pdf": "https://www.sciencedirect.com/science/article/pii/S0306987715004399"
+  "pdf": "https://www.sciencedirect.com/science/article/pii/S0306987715004399",
+  "slug": ""
  },
  {
   "year": 2015,
@@ -212,7 +236,8 @@
   "journal": "ESIR 同位素研讨会第十三期，扎达尔",
   "cat": "肿瘤生物学",
   "doi": "10.13140/RG.2.1.2592.0487",
-  "pdf": "assets/pdf/cb2633a0237801293d7a.pdf"
+  "pdf": "assets/pdf/cb2633a0237801293d7a.pdf",
+  "slug": ""
  },
  {
   "year": 2014,
@@ -220,7 +245,8 @@
   "authors": "Boros L.G.、Meuillet E.J.、Somlyai I.、Jancsó G.、Jákli G.、Krempels K.、Puskás L.G.、Nagy L.、Molnár M.、Laderoute K.R.、Thompson P.A.、Somlyai G.",
   "journal": "AACR 2014 年会",
   "cat": "肿瘤生物学",
-  "pdf": "assets/pdf/9f72a7e81f77f0531d2f.pdf"
+  "pdf": "assets/pdf/9f72a7e81f77f0531d2f.pdf",
+  "slug": ""
  },
  {
   "year": 2013,
@@ -228,7 +254,8 @@
   "authors": "G. Somlyai、L. Nagy、L. Puskás、G. Fábián、Z. Gyöngyi、K. Krempels、I. Somlyai、G. Laskay、G. Jancsó、G. Jákli、A. Kovács、I. Guller、D.S. Ávila、M. Aschner",
   "journal": "Front. Pharmacol. 会议摘要",
   "cat": "肿瘤生物学",
-  "pdf": "assets/pdf/31babf75d19aaad2a6e8.pdf"
+  "pdf": "assets/pdf/31babf75d19aaad2a6e8.pdf",
+  "slug": ""
  },
  {
   "year": 2013,
@@ -236,7 +263,8 @@
   "authors": "K. Krempels、I. Somlyai、Z. Gyöngyi、I. Ember、K. Balog、O. Abonyi、G. Somlyai",
   "journal": "癌症研究与治疗杂志 2013, 1(8):194-200",
   "cat": "肿瘤生物学",
-  "pdf": "assets/pdf/29a46011070ea1b96e20.pdf"
+  "pdf": "assets/pdf/29a46011070ea1b96e20.pdf",
+  "slug": "2013-breast-cancer"
  },
  {
   "year": 2012,
@@ -244,7 +272,8 @@
   "authors": "Z. Gyöngyi、F. Budán、I. Szabó、I. Ember、I. Kiss、K. Krempels、I. Somlyai、G. Somlyai",
   "journal": "营养与癌症，65:2, 240-246",
   "cat": "肿瘤生物学",
-  "pdf": "assets/pdf/e426eb9c811bb7c23c8b.pdf"
+  "pdf": "assets/pdf/e426eb9c811bb7c23c8b.pdf",
+  "slug": ""
  },
  {
   "year": 2012,
@@ -252,7 +281,8 @@
   "authors": "D. S. Ávila、G. Somlyai、I. Somlyai、M. Aschner",
   "journal": "毒理学快报 211(3):319-24",
   "cat": "抗衰老与神经",
-  "pdf": "assets/pdf/7c741536b178ba202f20.pdf"
+  "pdf": "assets/pdf/7c741536b178ba202f20.pdf",
+  "slug": ""
  },
  {
   "year": 2011,
@@ -260,7 +290,8 @@
   "authors": "A. Kovács、I. Guller、K. Krempels、I. Somlyai、I. Jánosi、Z. Gyöngyi、I. Szabó、I. Ember、Gabor Somlyai",
   "journal": "癌症治疗杂志 2, 548-556",
   "cat": "肿瘤生物学",
-  "pdf": "assets/pdf/c35c0863f86ee7b6463f.pdf"
+  "pdf": "assets/pdf/c35c0863f86ee7b6463f.pdf",
+  "slug": "2011-prostate-rct"
  },
  {
   "year": 2010,
@@ -268,7 +299,8 @@
   "authors": "Somlyai G.、Molnár M.、Laskay G.、Szabó M.、Berkényi T.、Guller I.、Kovács A.",
   "journal": "Orvosi Hetilap 151(36):1455-1460",
   "cat": "肿瘤生物学",
-  "pdf": "assets/pdf/b657230ad6bba4e7b8f7.pdf"
+  "pdf": "assets/pdf/b657230ad6bba4e7b8f7.pdf",
+  "slug": ""
  },
  {
   "year": 2010,
@@ -276,7 +308,8 @@
   "authors": "G. Somlyai、A. Kovács、I. Guller、Z. Gyöngyi、K. Krempels、I. Somlyai、M. Szabó、T. Berkényi、M. Molnár",
   "journal": "欧洲癌症杂志 8(5):208",
   "cat": "肿瘤生物学",
-  "pdf": "assets/pdf/b9565ebb310d4cfeadcf.pdf"
+  "pdf": "assets/pdf/b9565ebb310d4cfeadcf.pdf",
+  "slug": ""
  },
  {
   "year": 2008,
@@ -284,7 +317,8 @@
   "authors": "Krisztina Krempels、Ildikó Somlyai、Gabor Somlyai",
   "journal": "综合癌症疗法 7(3):172-81",
   "cat": "肿瘤生物学",
-  "pdf": "assets/pdf/3bfcf1f3b29628cfb44c.pdf"
+  "pdf": "assets/pdf/3bfcf1f3b29628cfb44c.pdf",
+  "slug": ""
  },
  {
   "year": 2007,
@@ -292,7 +326,8 @@
   "authors": "Somlyai, G.",
   "journal": "Biokémia, 31:28-32",
   "cat": "肿瘤生物学",
-  "pdf": "assets/pdf/8f40b4a9d3213f47cc22.pdf"
+  "pdf": "assets/pdf/8f40b4a9d3213f47cc22.pdf",
+  "slug": ""
  },
  {
   "year": 2006,
@@ -300,7 +335,8 @@
   "authors": "Laszlo G. Boros、Andrei Kochegarov、Istvan Szigeti、Samuel T. Lee、Gabor Jancso、Gyorgy Jakli、Gabor Somlyai",
   "journal": "代谢组学学会第二次科学会议，87",
   "cat": "代谢与糖尿病",
-  "pdf": "assets/pdf/c34f5e76188ae9b15890.pdf"
+  "pdf": "assets/pdf/c34f5e76188ae9b15890.pdf",
+  "slug": ""
  },
  {
   "year": 2005,
@@ -308,7 +344,8 @@
   "authors": "Györe I.、Somlyai G.",
   "journal": "匈牙利运动医学评论 46/1:27-38",
   "cat": "运动与体能",
-  "pdf": "assets/pdf/0def63d53f9a83f6c01d.pdf"
+  "pdf": "assets/pdf/0def63d53f9a83f6c01d.pdf",
+  "slug": "2005-rowing-athletes"
  },
  {
   "year": 2004,
@@ -316,7 +353,8 @@
   "authors": "Somlyai, G.",
   "journal": "补充和替代医学杂志 VIII(4):30-35",
   "cat": "肿瘤生物学",
-  "pdf": "assets/pdf/4e5b64207de67a879e51.pdf"
+  "pdf": "assets/pdf/4e5b64207de67a879e51.pdf",
+  "slug": ""
  },
  {
   "year": 2001,
@@ -324,7 +362,8 @@
   "authors": "G. Somlyai",
   "journal": "补充和替代医学杂志 V(4):28-31",
   "cat": "肿瘤生物学",
-  "pdf": "assets/pdf/cc24998c516c5e8fe073.pdf"
+  "pdf": "assets/pdf/cc24998c516c5e8fe073.pdf",
+  "slug": ""
  },
  {
   "year": 2001,
@@ -332,7 +371,8 @@
   "authors": "Laskay, G.、Somlyai, G.、Jancsó, G.、Jákli, Gy.",
   "journal": "氘科学杂志 10, 17-23",
   "cat": "代谢与糖尿病",
-  "pdf": "assets/pdf/466b6b0de5cae994c254.pdf"
+  "pdf": "assets/pdf/466b6b0de5cae994c254.pdf",
+  "slug": ""
  },
  {
   "year": 2001,
@@ -340,7 +380,8 @@
   "authors": "G. Somlyai、G. Jancsó、Gy. Jákli、T. Berkényi、Z. Gyöngyi、I. Ember",
   "journal": "抗癌研究 21:1617",
   "cat": "肿瘤生物学",
-  "pdf": "assets/pdf/42412bd35d5b9e499329.pdf"
+  "pdf": "assets/pdf/42412bd35d5b9e499329.pdf",
+  "slug": ""
  },
  {
   "year": 2000,
@@ -348,7 +389,8 @@
   "authors": "Z. Gyöngyi、G. Somlyai",
   "journal": "体内 14:437-440",
   "cat": "肿瘤生物学",
-  "pdf": "assets/pdf/33696e072ca2f138862f.pdf"
+  "pdf": "assets/pdf/33696e072ca2f138862f.pdf",
+  "slug": ""
  },
  {
   "year": 1998,
@@ -356,7 +398,8 @@
   "authors": "G. Somlyai、G. Laskay、T. Berkényi、Z. Galbács、G. Galbács、S.A. Kiss、Gy. Jákli、G. Jancsó",
   "journal": "Z. Oncol. / J. Oncol. 30, 4",
   "cat": "肿瘤生物学",
-  "pdf": "assets/pdf/bdf6fbebc4b77e6ad12f.pdf"
+  "pdf": "assets/pdf/bdf6fbebc4b77e6ad12f.pdf",
+  "slug": ""
  },
  {
   "year": 1998,
@@ -364,7 +407,8 @@
   "authors": "Gabor Somlyai、G. Laskay、T. Berkényi、Gy. Jákli、G. Jancsó",
   "journal": "同位素标记化合物的合成和应用 1997",
   "cat": "肿瘤生物学",
-  "pdf": "assets/pdf/e390037e0df04684f57d.pdf"
+  "pdf": "assets/pdf/e390037e0df04684f57d.pdf",
+  "slug": ""
  },
  {
   "year": 1997,
@@ -372,7 +416,8 @@
   "authors": "G. Somlyai",
   "journal": "经验医学学报，7/1997, 381-388",
   "cat": "肿瘤生物学",
-  "pdf": ""
+  "pdf": "",
+  "slug": ""
  },
  {
   "year": 1993,
@@ -380,6 +425,7 @@
   "authors": "Gabor Somlyai、Gábor Jancsó、György Jákli、Kornélia Vass、Balázs Barna、Viktor Lakics、Tamás Gaál",
   "journal": "FEBS Letters, 317, 1-4",
   "cat": "肿瘤生物学",
-  "pdf": "assets/pdf/4b880068407281ccd11b.pdf"
+  "pdf": "assets/pdf/4b880068407281ccd11b.pdf",
+  "slug": "1993-febs-letters"
  }
 ]

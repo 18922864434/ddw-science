@@ -42,16 +42,6 @@
       });
     }
 
-    /* ---------- 计数器动画 ---------- */
-    if ($.fn.counterUp && $.fn.waypoint) {
-      $('.ddw-stat .num').each(function () {
-        var $this = $(this);
-        $this.waypoint(function () {
-          $this.counterUp({ delay: 10, time: 1200 });
-        }, { offset: '100%' });
-      });
-    }
-
     /* ---------- 年份筛选（会议/论文） ---------- */
     var $yearBtns = $('.ddw-year-btn');
     var $yearItems = $('.ddw-year-item');
@@ -72,6 +62,32 @@
           });
         }
       });
+    }
+
+    /* ---------- 核心数字计数动画 ---------- */
+    var $counters = $('.ddw-stat .num[data-count]');
+    if ($counters.length) {
+      var animated = false;
+      function tryCount() {
+        if (animated) return;
+        var $stats = $('.ddw-stats');
+        if (!$stats.length) return;
+        if ($(window).scrollTop() + $(window).height() > $stats.offset().top + 80) {
+          animated = true;
+          $counters.each(function () {
+            var $el = $(this);
+            var target = parseInt($el.data('count'), 10);
+            $({ n: 0 }).animate({ n: target }, {
+              duration: 1600,
+              easing: 'swing',
+              step: function () { $el.text(Math.floor(this.n)); },
+              complete: function () { $el.text(target); }
+            });
+          });
+        }
+      }
+      $(window).on('scroll', tryCount);
+      tryCount();
     }
 
   });
