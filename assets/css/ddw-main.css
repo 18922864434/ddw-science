@@ -241,7 +241,12 @@ h6 {
 .ddw-home-hero h1 {
   font-size: 46px;
   font-weight: 700;
+  color: #fff;
   line-height: 1.3;
+}
+
+.ddw-home-hero p {
+  color: #fff;
 }
 
 .ddw-home-hero .lead {
