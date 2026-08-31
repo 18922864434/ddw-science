@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>视频合集 | DDW Science 低氘水研究</title>
+  <meta name="description" content="国际低氘大会（ICDD）大会演讲与国际专家访谈视频合集，国内可直接播放。">
+  <meta name="keywords" content="氘耗减大会,ICDD,低氘水视频,大会演讲,专家访谈">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="canonical" href="https://ddw-science.com/videos.html">
+  <meta name="author" content="HYD LLC">
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/ddw-main.css">
+  <link rel="stylesheet" href="assets/css/ddw-video.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "首页", "item": "https://ddw-science.com/" },
+      { "@type": "ListItem", "position": 2, "name": "学术会议", "item": "https://ddw-science.com/conferences.html" },
+      { "@type": "ListItem", "position": 3, "name": "视频合集", "item": "https://ddw-science.com/videos.html" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<!-- 顶部条 -->
+<div class="ddw-topbar">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <span><i class="fas fa-flask"></i> 低氘水研究 · 科学研究信息平台</span>
+      </div>
+      <div class="col-md-6 lang-switch">
+        <span>中文</span>
+        <a href="https://hyd.hu/en/" target="_blank" rel="noopener">EN</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 导航 -->
+<nav class="navbar navbar-expand-lg ddw-nav">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      DDW Science<small>低氘水研究</small>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#ddwNav" aria-controls="ddwNav" aria-expanded="false" aria-label="切换导航">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="ddwNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">首页</a></li>
+        <li class="nav-item"><a class="nav-link" href="about-ddw.html">关于低氘水</a></li>
+        <li class="nav-item"><a class="nav-link" href="research.html">研究</a></li>
+        <li class="nav-item"><a class="nav-link" href="publications.html">论文</a></li>
+        <li class="nav-item"><a class="nav-link" href="books.html">图书</a></li>
+        <li class="nav-item"><a class="nav-link active" href="conferences.html">国际会议</a></li>
+        <li class="nav-item"><a class="nav-link" href="scientist.html">科学家</a></li>
+        <li class="nav-item"><a class="nav-link" href="applications.html">应用方向</a></li>
+        <li class="nav-item"><a class="nav-link" href="eu-project.html">欧盟项目</a></li>
+        <li class="nav-item"><a class="nav-link" href="experts.html">专家</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">联系我们</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero（内容由 videos.js 按 URL 参数填充） -->
+<section class="ddw-hero">
+  <div class="container">
+    <div class="eyebrow" id="colEyebrow">视频合集</div>
+    <h1 id="colTitle">视频合集</h1>
+    <p id="colSubtitle">正在加载…</p>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">首页</a></li>
+        <li class="breadcrumb-item"><a href="conferences.html">学术会议</a></li>
+        <li class="breadcrumb-item active" id="colCrumb">视频合集</li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<!-- 视频内容区 -->
+<section class="ddw-section">
+  <div class="container">
+
+    <!-- 合集切换 -->
+    <ul class="ddw-col-tabs" id="colTabs"></ul>
+
+    <!-- 正常态：播放器 + 列表 -->
+    <div class="row" id="videoMain">
+      <div class="col-lg-8">
+        <div class="ddw-player" id="playerBox">
+          <video id="ddwPlayer" controls playsinline preload="metadata" poster=""></video>
+          <div class="ddw-player-fallback">
+            <div class="fb-icon"><i class="fas fa-video-slash"></i></div>
+            <div class="fb-title">视频即将上线</div>
+            <div class="fb-desc">该视频的播放地址尚未配置。请在 assets/js/video-config.js 中填写 src 字段。</div>
+          </div>
+        </div>
+        <h2 class="ddw-now-title" id="nowTitle"></h2>
+        <div class="ddw-now-meta">
+          <span id="nowSpeaker"></span><span class="sep">|</span><span id="nowDuration"></span>
+        </div>
+        <p class="ddw-now-desc" id="nowDesc"></p>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="ddw-video-list">
+          <div class="ddw-video-list-head" id="listHead">视频列表</div>
+          <div id="videoList"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 空态：合集不存在 -->
+    <div class="ddw-video-empty" id="videoEmpty" style="display:none;">
+      <div class="em-icon"><i class="fas fa-folder-open"></i></div>
+      <h3>未找到该视频合集</h3>
+      <p>链接中的合集标识不存在或已下线，请从学术会议页重新进入。</p>
+      <a href="conferences.html" class="btn" style="background:var(--ddw-primary);color:#fff;">
+        <i class="fas fa-arrow-left"></i> 返回学术会议
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- 页脚 -->
+<footer class="ddw-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 mb-4">
+        <h5>DDW Science · 低氘水研究</h5>
+        <p>本网站为低氘水（DDW）研究的科学信息平台，以 HYD / Gabor Somlyai 博士的学术名义呈现，内容用于学术交流与科学普及。</p>
+        <a href="https://hyd.hu/en/" target="_blank" rel="noopener" class="btn btn-sm" style="background:var(--ddw-gold);color:#0b2540;">访问 HYD 英文站 <i class="fas fa-external-link-alt"></i></a>
+      </div>
+      <div class="col-lg-4 mb-4">
+        <h5>快速导航</h5>
+        <ul class="list-unstyled footer-links">
+          <li><a href="about-ddw.html">关于低氘水</a></li>
+          <li><a href="research.html">研究进展</a></li>
+          <li><a href="publications.html">论文解读</a></li>
+          <li><a href="books.html">图书介绍</a></li>
+          <li><a href="conferences.html">国际会议</a></li>
+          <li><a href="scientist.html">科学家介绍</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4 mb-4">
+        <h5>更多</h5>
+        <ul class="list-unstyled footer-links">
+          <li><a href="applications.html">应用研究方向</a></li>
+          <li><a href="eu-project.html">欧盟研究项目</a></li>
+          <li><a href="experts.html">专家证言</a></li>
+          <li><a href="contact.html">联系我们</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="disclaimer">
+      <strong>学术声明：</strong>本网站为科学研究信息平台，内容仅用于学术交流与科学普及，不构成任何医疗建议或产品推荐。
+    </div>
+    <div class="footer-bottom">
+      <div class="row">
+        <div class="col-md-6">© 2026 HYD / Gabor Somlyai 学术研究 · DDW Science</div>
+        <div class="col-md-6 text-md-right">
+          <a href="https://hyd.hu/en/" target="_blank" rel="noopener">English</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/jquery-3.6.0.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/ddw-main.js"></script>
+<script src="assets/js/video-config.js"></script>
+<script src="assets/js/videos.js"></script>
+</body>
+</html>

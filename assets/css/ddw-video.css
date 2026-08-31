@@ -1,0 +1,315 @@
+/* ============================================================
+   DDW 学术站 — 视频合集页样式
+   依赖：ddw-main.css（复用其 :root 令牌，本文件不写裸色值）
+   ============================================================ */
+
+/* ---------- 合集切换 tab ---------- */
+.ddw-col-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  border-bottom: 1px solid var(--ddw-border);
+  padding: 0 0 14px;
+  margin-bottom: 26px;
+  list-style: none;
+}
+
+.ddw-col-tabs li {
+  margin: 0;
+}
+
+.ddw-col-tabs a {
+  display: inline-block;
+  padding: 9px 20px;
+  border: 1px solid var(--ddw-border);
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ddw-muted);
+  text-decoration: none;
+  background: #fff;
+  transition: all .2s;
+}
+
+.ddw-col-tabs a:hover {
+  border-color: var(--ddw-primary);
+  color: var(--ddw-primary);
+}
+
+.ddw-col-tabs a.active {
+  background: var(--ddw-primary);
+  border-color: var(--ddw-primary);
+  color: #fff;
+}
+
+/* ---------- 播放器 ---------- */
+.ddw-player {
+  position: relative;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(14, 77, 140, .14);
+}
+
+.ddw-player video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+/* 不支持 aspect-ratio 的旧浏览器兜底 */
+@supports not (aspect-ratio: 16 / 9) {
+  .ddw-player video {
+    height: 0;
+    padding-bottom: 56.25%;
+  }
+}
+
+/* src 缺失 / 加载失败时的占位层 */
+.ddw-player-fallback {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, var(--ddw-primary), var(--ddw-primary-dark));
+  color: #fff;
+  text-align: center;
+  padding: 30px;
+}
+
+.ddw-player.is-empty .ddw-player-fallback {
+  display: flex;
+}
+
+.ddw-player.is-empty video {
+  display: none;
+}
+
+.ddw-player-fallback .fb-icon {
+  font-size: 44px;
+  color: var(--ddw-gold);
+  margin-bottom: 14px;
+}
+
+.ddw-player-fallback .fb-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.ddw-player-fallback .fb-desc {
+  font-size: 14px;
+  opacity: .85;
+  line-height: 1.7;
+  max-width: 420px;
+}
+
+/* ---------- 当前视频信息 ---------- */
+.ddw-now-title {
+  font-size: 21px;
+  font-weight: 600;
+  color: var(--ddw-primary);
+  margin: 22px 0 8px;
+  line-height: 1.5;
+}
+
+.ddw-now-meta {
+  font-size: 14px;
+  color: var(--ddw-muted);
+  margin-bottom: 12px;
+}
+
+.ddw-now-meta .sep {
+  margin: 0 8px;
+  color: var(--ddw-border);
+}
+
+.ddw-now-desc {
+  font-size: 15px;
+  line-height: 2;
+  color: var(--ddw-text);
+}
+
+/* ---------- 视频列表 ---------- */
+.ddw-video-list {
+  max-height: 620px;
+  overflow-y: auto;
+  border: 1px solid var(--ddw-border);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.ddw-video-list-head {
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--ddw-border);
+  background: var(--ddw-bg-light);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ddw-primary);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.ddw-video-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--ddw-border);
+  border-left: 3px solid transparent;
+  cursor: pointer;
+  transition: background .2s;
+}
+
+.ddw-video-item:last-child {
+  border-bottom: none;
+}
+
+.ddw-video-item:hover {
+  background: var(--ddw-bg-light);
+}
+
+.ddw-video-item.active {
+  background: rgba(14, 77, 140, .07);
+  border-left-color: var(--ddw-accent);
+}
+
+.ddw-video-item .thumb-wrap {
+  position: relative;
+  flex: 0 0 120px;
+  width: 120px;
+}
+
+/* 缩略图未就绪时的占位底：品牌渐变 + 播放图标（图片加载失败后自动显现） */
+.ddw-video-item .thumb-wrap::before {
+  content: "\f144";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: rgba(255, 255, 255, .6);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.ddw-video-item .thumb {
+  position: relative;
+  z-index: 1;
+  width: 120px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 4px;
+  background: linear-gradient(135deg, var(--ddw-primary), var(--ddw-primary-dark));
+  display: block;
+}
+
+.ddw-video-item .v-duration {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  background: rgba(0, 0, 0, .78);
+  color: #fff;
+  font-size: 11px;
+  padding: 1px 5px;
+  border-radius: 3px;
+  line-height: 1.6;
+}
+
+.ddw-video-item .v-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.ddw-video-item .v-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ddw-text);
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ddw-video-item.active .v-title {
+  color: var(--ddw-primary);
+}
+
+.ddw-video-item .v-speaker {
+  font-size: 12px;
+  color: var(--ddw-muted);
+  margin-top: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 播放中图标 */
+.ddw-video-item.active .v-speaker::before {
+  content: "\f144";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  color: var(--ddw-accent);
+  margin-right: 5px;
+}
+
+/* ---------- 空态 / 合集不存在 ---------- */
+.ddw-video-empty {
+  text-align: center;
+  padding: 70px 20px;
+  background: #fff;
+  border: 1px solid var(--ddw-border);
+  border-radius: 8px;
+}
+
+.ddw-video-empty .em-icon {
+  font-size: 46px;
+  color: var(--ddw-border);
+  margin-bottom: 16px;
+}
+
+.ddw-video-empty h3 {
+  font-size: 19px;
+  color: var(--ddw-primary);
+  margin-bottom: 10px;
+}
+
+.ddw-video-empty p {
+  color: var(--ddw-muted);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 991px) {
+  .ddw-video-list {
+    max-height: none;
+    margin-top: 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ddw-col-tabs {
+    gap: 8px;
+  }
+
+  .ddw-col-tabs a {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .ddw-now-title {
+    font-size: 18px;
+  }
+
+  .ddw-video-item .thumb-wrap,
+  .ddw-video-item .thumb {
+    flex-basis: 96px;
+    width: 96px;
+  }
+}
