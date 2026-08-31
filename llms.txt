@@ -34,7 +34,3 @@
 - [HYD 英文站](https://hyd.hu/en/) — HYD 官方英文网站
 - [Aqua-Synapse CORDIS 项目](https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/how-to-participate/org-details/999999999/project/101086453/program/43108390/details) — 欧盟项目官方信息
 - [国际低氘大会](https://deuteriumdepletion.com/) — ICDD 各届科学项目
-
-## 联系
-
-学术邮箱：research@ddw-science.com（学术合作、媒体采访、文献索取）
