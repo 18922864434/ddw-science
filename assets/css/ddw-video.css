@@ -79,6 +79,50 @@
   padding: 30px;
 }
 
+/* 播放器 Loading 缓冲动画层 */
+.ddw-player-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, .65);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #fff;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+  z-index: 5;
+}
+
+.ddw-player.is-loading .ddw-player-loading {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, .25);
+  border-top-color: var(--ddw-gold, #f39c12);
+  border-radius: 50%;
+  animation: ddwSpin .8s linear infinite;
+}
+
+.loading-text {
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, .9);
+}
+
+@keyframes ddwSpin {
+  to { transform: rotate(360deg); }
+}
+
 .ddw-player.is-empty .ddw-player-fallback {
   display: flex;
 }
@@ -182,19 +226,25 @@
   width: 120px;
 }
 
-/* 缩略图未就绪时的占位底：品牌渐变 + 播放图标（图片加载失败后自动显现） */
-.ddw-video-item .thumb-wrap::before {
-  content: "\f144";
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 24px;
-  color: rgba(255, 255, 255, .6);
-  z-index: 0;
-  pointer-events: none;
+/* 缩略图占位底：品牌渐变 + 播放图标 */
+.ddw-video-item .thumb-poster {
+  position: relative;
+  width: 120px;
+  aspect-ratio: 16 / 9;
+  border-radius: 4px;
+  background: linear-gradient(135deg, var(--ddw-primary), var(--ddw-primary-dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, .7);
+  font-size: 22px;
+  overflow: hidden;
+}
+
+.ddw-video-item .thumb-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .ddw-video-item .thumb {

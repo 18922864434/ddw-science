@@ -35,7 +35,7 @@
   var $player = $('#ddwPlayer');
   var player = $player[0];
 
-  /* ---------- HTML 转义（配置内容一律转义后再插入） ---------- */
+  /* ---------- HTML 转义 ---------- */
   function esc(str) {
     return String(str == null ? '' : str).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
@@ -71,7 +71,7 @@
     );
   });
 
-  /* ---------- 渲染视频列表 ---------- */
+  /* ---------- 渲染视频列表（优化版：不再渲染全量视频节点，消除网络并发阻碍） ---------- */
   var videos = $.isArray(col.videos) ? col.videos : [];
   $('#listHead').text('视频列表（' + videos.length + '）');
 
@@ -80,13 +80,19 @@
     $list.append('<div style="padding:30px 16px;text-align:center;color:var(--ddw-muted);font-size:14px;">该合集暂无视频</div>');
   } else {
     $.each(videos, function (i, v) {
+      var thumbHtml = '';
+      if (v.thumb) {
+        thumbHtml = '<div class="thumb-poster"><img src="' + esc(v.thumb) + '" alt="' + esc(v.title) + '"></div>';
+      } else {
+        // 静态 CSS 品牌渐变 + 播放图标（免除发起多余视频 HTTP 请求）
+        thumbHtml = '<div class="thumb-poster"><i class="fas fa-play-circle"></i></div>';
+      }
+
       $list.append(
         '<div class="ddw-video-item" data-index="' + i + '" data-id="' + esc(v.id) + '">' +
           '<div class="thumb-wrap">' +
-            '<video class="thumb" src="' + esc(v.src) + '#t=0.1" alt="' + esc(v.title) + '"' +
-            ' preload="metadata" muted playsinline' +
-            ' onerror="this.style.visibility=\'hidden\'"></video>' +
-            '<span class="v-duration">' + esc(v.duration) + '</span>' +
+            thumbHtml +
+            '<span class="v-duration">' + esc(v.duration || '') + '</span>' +
           '</div>' +
           '<div class="v-info">' +
             '<div class="v-title">' + esc(v.title) + '</div>' +
@@ -97,67 +103,84 @@
     });
   }
 
+  /* ---------- 播放器状态事件监听 ---------- */
+  $player.on('loadstart waiting', function () {
+    if (player.src && !$playerBox.hasClass('is-empty')) {
+      $playerBox.addClass('is-loading');
+    }
+  });
+
+  $player.on('canplay canplaythrough playing pause ended', function () {
+    $playerBox.removeClass('is-loading');
+  });
+
+  $player.on('loadedmetadata', function () {
+    var d = player.duration;
+    if (d && isFinite(d)) {
+      var m = Math.floor(d / 60), s = Math.floor(d % 60);
+      var formatted = m + ':' + (s < 10 ? '0' + s : s);
+      $('#nowDuration').text(formatted);
+      // 同步更新侧边栏对应项的未配置时长
+      var activeIdx = $list.find('.ddw-video-item.active').data('index');
+      if (activeIdx !== undefined && !videos[activeIdx].duration) {
+        $list.find('.ddw-video-item.active .v-duration').text(formatted);
+      }
+    }
+  });
+
+  $player.on('error', function () {
+    $playerBox.removeClass('is-loading').addClass('is-empty');
+  });
+
   /* ---------- 播放指定视频 ---------- */
   function playVideo(index, doScroll) {
     var v = videos[index];
     if (!v) return;
 
-    // 播放器换源（src 附加 #t=0.1 让初始加载显示第一帧，取代静态 poster）
+    $playerBox.removeClass('is-loading');
+
     if (v.src) {
       $playerBox.removeClass('is-empty');
-      player.src = v.src + '#t=0.1';
       player.poster = v.thumb || '';
+      // 直接把真实的视频源赋予 src，取消之前列表引入的并发 #t=0.1 阻碍
+      player.src = v.src;
       player.load();
     } else {
-      // src 缺失 → 占位层
       $playerBox.addClass('is-empty');
       player.removeAttribute('src');
       player.poster = v.thumb || '';
       player.load();
     }
 
-    // 时长回填：duration 字段为空时，等 metadata 加载后动态填充
-    player.onloadedmetadata = function () {
-      var d = player.duration;
-      if (d && isFinite(d)) {
-        var m = Math.floor(d / 60), s = Math.floor(d % 60);
-        $('#nowDuration').text(m + ':' + (s < 10 ? '0' + s : s));
-      }
-    };
-    // 加载失败兜底：显示「视频即将上线」占位层
-    player.onerror = function () {
-      $playerBox.addClass('is-empty');
-    };
-
-    // 更新信息区
+    // 更新文本信息
     $('#nowTitle').text(v.title || '');
     $('#nowSpeaker').text(v.speaker || '');
     $('#nowDuration').text(v.duration || '');
     $('#nowDesc').text(v.desc || '');
 
-    // 高亮当前项
+    // 高亮选中项
     $list.find('.ddw-video-item').removeClass('active')
       .filter('[data-index="' + index + '"]').addClass('active');
 
-    // 同步 URL（可复制分享）
+    // 同步 URL
     var qs = '?c=' + encodeURIComponent(colId);
     if (v.id) qs += '&v=' + encodeURIComponent(v.id);
     if (window.history && window.history.replaceState) {
       window.history.replaceState(null, '', qs);
     }
 
-    // 移动端点击后滚回播放器
+    // 移动端滚动
     if (doScroll && window.innerWidth < 992) {
       $('html, body').animate({ scrollTop: $playerBox.offset().top - 80 }, 400);
     }
   }
 
-  /* ---------- 列表点击 ---------- */
+  /* ---------- 点击列表项 ---------- */
   $list.on('click', '.ddw-video-item', function () {
     playVideo(parseInt($(this).data('index'), 10), true);
   });
 
-  /* ---------- 初始化：优先深链 ?v=，否则第一个 ---------- */
+  /* ---------- 初始化 ---------- */
   var startIndex = 0;
   if (videoId) {
     for (var i = 0; i < videos.length; i++) {
