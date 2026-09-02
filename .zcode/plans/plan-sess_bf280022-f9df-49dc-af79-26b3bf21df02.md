@@ -33,8 +33,8 @@
 - `Cong Fengsong 教授` → `丛峰松 教授`（表格行 + 证言卡片 + 任何 `data-` 属性，全页替换）
 
 ### 5. scientist.html 首段博士名
-- H1 已是"高博·索姆利艾博士 (Gabor Somlyai)"，但首段正文第一次出现是纯英文 "Gabor Somlyai"。
-- 改首段首提为"高博·索姆利艾博士 (Gabor Somlyai)"，后续可用"索姆利艾"或"高博·索姆利艾博士"。
+- H1 已是"高博·索姆利艾博士 (Gábor Somlyai)"，但首段正文第一次出现是纯英文 "Gábor Somlyai"。
+- 改首段首提为"高博·索姆利艾博士 (Gábor Somlyai)"，后续可用"索姆利艾"或"高博·索姆利艾博士"。
 
 ### 6. 计数动画死代码
 - `assets/js/jquery.counterup.min.js`、`assets/js/jquery.waypoints.min.js` 存在但未被任何 HTML 引入；`ddw-main.js` 有计数逻辑但无 `data-count` 钩子。
@@ -225,7 +225,7 @@
 8. publications.html ItemList numberOfItems 与实际收录数 N 一致，且补全 itemListElement
 9. 全站"60 篇"口径统一为"约 60 篇/该领域已发表约 60 篇"+"本站收录 N 篇"
 10. experts.html 8 位专家姓名与知识库一致（László G. Boros、丛峰松等）
-11. scientist.html 首段博士名首提为"高博·索姆利艾博士 (Gabor Somlyai)"
+11. scientist.html 首段博士名首提为"高博·索姆利艾博士 (Gábor Somlyai)"
 12. 计数动画激活或死代码清除（二选一，默认激活）
 13. 12 张 img 带 loading="lazy"
 14. 临时文件 _tmp_spec.txt/_tmp_kb_toc.txt/_patch_meta.py/_filter_check.js 已删
