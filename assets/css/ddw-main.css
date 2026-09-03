@@ -629,6 +629,90 @@ h6 {
   line-height: 1.7;
 }
 
+/* ---------- 联系明细卡片 ---------- */
+.ddw-detail-card {
+  background: #fff;
+  border: 1px solid var(--ddw-border);
+  border-radius: 8px;
+  padding: 30px;
+  height: 100%;
+  box-shadow: 0 4px 15px rgba(14, 77, 140, .05);
+  transition: transform .25s, box-shadow .25s;
+}
+
+.ddw-detail-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(14, 77, 140, .1);
+}
+
+.ddw-detail-card .card-badge {
+  display: inline-block;
+  background: rgba(14, 77, 140, .08);
+  color: var(--ddw-primary);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 4px;
+  margin-bottom: 14px;
+}
+
+.ddw-detail-card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ddw-primary);
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--ddw-bg-light);
+  padding-bottom: 12px;
+}
+
+.ddw-contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ddw-contact-list li {
+  position: relative;
+  padding-left: 36px;
+  margin-bottom: 18px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ddw-text);
+}
+
+.ddw-contact-list li:last-child {
+  margin-bottom: 0;
+}
+
+.ddw-contact-list li i {
+  position: absolute;
+  left: 0;
+  top: 4px;
+  font-size: 18px;
+  color: var(--ddw-accent);
+  width: 24px;
+  text-align: center;
+}
+
+.ddw-contact-list .label {
+  font-weight: 600;
+  color: var(--ddw-primary);
+  display: block;
+  font-size: 13px;
+  margin-bottom: 2px;
+}
+
+.ddw-contact-list a {
+  color: var(--ddw-primary);
+  text-decoration: none;
+  transition: color .2s;
+}
+
+.ddw-contact-list a:hover {
+  color: var(--ddw-accent);
+  text-decoration: underline;
+}
+
 /* ---------- 学术声明强调块 ---------- */
 .ddw-note {
   background: #fff8e6;
@@ -687,5 +771,236 @@ h6 {
 
   .ddw-stat .num {
     font-size: 36px;
+  }
+}
+
+/* ---------- 历届大会（图文版） ---------- */
+/* 图 55% : 文 45% 左右交错；图库 = 1 主图 + 辅图列（默认 2 张，增减辅图自动堆叠/横排） */
+.ddw-conf-list {
+  display: grid;
+  gap: 32px;
+  margin-top: 28px;
+}
+
+.ddw-conf-item {
+  display: grid;
+  grid-template-columns: 55fr 45fr;
+  background: #fff;
+  border: 1px solid var(--ddw-border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform .25s, box-shadow .25s;
+}
+
+.ddw-conf-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(14, 77, 140, .12);
+}
+
+/* 左右交错：偶数项图片在右、文字在左 */
+.ddw-conf-item:nth-child(even) .ddw-conf-media {
+  order: 2;
+}
+
+.ddw-conf-item:nth-child(even) .ddw-conf-body {
+  order: 1;
+}
+
+/* 图库区：固定最小高度，图库绝对定位填满（图片不参与高度计算，保证五届卡片高度一致） */
+.ddw-conf-media {
+  position: relative;
+  margin: 0;
+  min-width: 0;
+  min-height: 400px;
+}
+
+.ddw-conf-gallery {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  grid-template-rows: minmax(0, 1fr);
+  gap: 8px;
+  background: var(--ddw-bg-light);
+}
+
+.ddw-conf-main {
+  min-width: 0;
+}
+
+.ddw-conf-main img,
+.ddw-conf-side img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ddw-conf-side {
+  display: grid;
+  grid-auto-rows: minmax(0, 1fr);
+  gap: 8px;
+  min-width: 0;
+}
+
+/* 文字区 */
+.ddw-conf-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  padding: 32px 36px;
+}
+
+.ddw-conf-tag {
+  margin: 0 0 6px;
+  color: var(--ddw-accent);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.ddw-conf-name {
+  margin: 0 0 14px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--ddw-primary);
+}
+
+.ddw-conf-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 28px;
+  margin: 0 0 16px;
+}
+
+.ddw-conf-meta dt {
+  margin-bottom: 2px;
+  color: var(--ddw-muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.ddw-conf-meta dt i {
+  margin-right: 6px;
+  color: var(--ddw-accent);
+}
+
+.ddw-conf-meta dd {
+  margin: 0;
+  color: var(--ddw-text);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.ddw-conf-desc {
+  margin: 0 0 18px;
+  color: var(--ddw-muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* 详情链接：默认 / 悬停 / 键盘聚焦三态 */
+.ddw-conf-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ddw-primary);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.ddw-conf-link i {
+  transition: transform .2s;
+}
+
+.ddw-conf-link:hover {
+  color: var(--ddw-primary-dark);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.ddw-conf-link:hover i {
+  transform: translateX(3px);
+}
+
+.ddw-conf-link:focus-visible {
+  outline: 2px solid var(--ddw-primary);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* 动效克制：偏好减少动效时关闭位移与过渡 */
+@media (prefers-reduced-motion: reduce) {
+  .ddw-conf-item,
+  .ddw-conf-link,
+  .ddw-conf-link i {
+    transition: none;
+  }
+
+  .ddw-conf-item:hover {
+    transform: none;
+  }
+}
+
+/* 平板：保持两列交错，缩小间距与字号 */
+@media (max-width: 991px) {
+  .ddw-conf-body {
+    padding: 24px 26px;
+  }
+
+  .ddw-conf-name {
+    font-size: 18px;
+  }
+
+  .ddw-conf-desc {
+    font-size: 13px;
+  }
+
+  .ddw-conf-meta {
+    gap: 6px 20px;
+  }
+}
+
+/* 手机：单列，图上文下；主图全宽 + 辅图横排 */
+@media (max-width: 768px) {
+  .ddw-conf-item {
+    grid-template-columns: 1fr;
+  }
+
+  .ddw-conf-item:nth-child(even) .ddw-conf-media,
+  .ddw-conf-item:nth-child(even) .ddw-conf-body {
+    order: initial;
+  }
+
+  .ddw-conf-media {
+    min-height: 0;
+  }
+
+  .ddw-conf-gallery {
+    position: static;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .ddw-conf-main {
+    aspect-ratio: 16 / 10;
+  }
+
+  .ddw-conf-side {
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    grid-auto-rows: auto;
+  }
+
+  .ddw-conf-side img {
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+
+  .ddw-conf-body {
+    padding: 20px 22px;
   }
 }
