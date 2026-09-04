@@ -1004,3 +1004,217 @@ h6 {
     padding: 20px 22px;
   }
 }
+
+/* ---------- 科学家页首屏：白底大图（参照 hyd.hu） ---------- */
+.ddw-scientist-hero {
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 底部金色渐隐细线，呼应品牌点缀色 */
+.ddw-scientist-hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--ddw-gold) 0%, rgba(201, 162, 39, 0) 65%);
+}
+
+.sci-hero-photo-col {
+  padding: 0;
+}
+
+.sci-hero-photo {
+  width: 100%;
+  /* 桌面端撑满首屏：扣除顶部条与导航约 126px */
+  height: calc(100vh - 126px);
+  min-height: 520px;
+  max-height: 880px;
+  object-fit: cover;
+  object-position: 10% 50%;
+  animation: sciHeroPhoto 1s ease-out both;
+}
+
+.sci-hero-text-col {
+  padding: 70px 0 70px 48px;
+}
+
+.sci-hero-eyebrow {
+  color: var(--ddw-gold);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  animation: sciHeroText .7s ease-out both;
+}
+
+.ddw-scientist-hero h1 {
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--ddw-primary-dark);
+  line-height: 1.35;
+  animation: sciHeroText .7s ease-out .12s both;
+}
+
+.sci-hero-en {
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--ddw-primary);
+  white-space: nowrap;
+}
+
+.sci-hero-lead {
+  color: var(--ddw-primary);
+  font-size: 16.5px;
+  font-weight: 600;
+  line-height: 1.8;
+  margin-top: 18px;
+  animation: sciHeroText .7s ease-out .22s both;
+}
+
+.sci-hero-bio p {
+  color: var(--ddw-muted);
+  font-size: 15.5px;
+  line-height: 1.95;
+  margin-top: 14px;
+  animation: sciHeroText .7s ease-out .28s both;
+}
+
+.sci-hero-bio p+p {
+  margin-top: 10px;
+}
+
+.sci-hero-btn {
+  background: var(--ddw-gold);
+  color: #0b2540;
+  font-weight: 600;
+  padding: 12px 28px;
+  border-radius: 4px;
+  border: none;
+  margin-top: 28px;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform .2s, box-shadow .2s;
+  animation: sciHeroText .7s ease-out .32s both;
+}
+
+.sci-hero-btn:hover {
+  color: #0b2540;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .18);
+}
+
+.sci-hero-breadcrumb {
+  margin-top: 44px;
+  margin-bottom: 0;
+  font-size: 14px;
+  animation: sciHeroText .7s ease-out .42s both;
+}
+
+.sci-hero-breadcrumb a {
+  color: var(--ddw-primary);
+  text-decoration: none;
+}
+
+.sci-hero-breadcrumb .breadcrumb-item {
+  color: var(--ddw-muted);
+}
+
+.sci-hero-breadcrumb .breadcrumb-item.active {
+  color: var(--ddw-muted);
+}
+
+.sci-hero-breadcrumb .breadcrumb-item+.breadcrumb-item::before {
+  color: #b8c4d0;
+}
+
+@keyframes sciHeroPhoto {
+  from {
+    opacity: 0;
+    transform: scale(1.03);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes sciHeroText {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 平板：上下排列，照片在上 */
+@media (max-width: 991px) {
+  .sci-hero-photo {
+    height: 46vh;
+    min-height: 340px;
+    object-position: 15% 22%;
+  }
+
+  .sci-hero-text-col {
+    padding: 40px 0 56px;
+    text-align: center;
+  }
+
+  .ddw-scientist-hero h1 {
+    font-size: 36px;
+  }
+
+  .sci-hero-en {
+    font-size: 26px;
+  }
+
+  .sci-hero-breadcrumb {
+    margin-top: 30px;
+  }
+
+  .sci-hero-breadcrumb ol {
+    justify-content: center;
+  }
+}
+
+/* 手机：继续压缩高度与字号 */
+@media (max-width: 768px) {
+  .sci-hero-photo {
+    height: 38vh;
+    min-height: 280px;
+  }
+
+  .ddw-scientist-hero h1 {
+    font-size: 30px;
+  }
+
+  .sci-hero-en {
+    font-size: 22px;
+  }
+
+  .sci-hero-lead {
+    font-size: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .sci-hero-photo,
+  .sci-hero-eyebrow,
+  .ddw-scientist-hero h1,
+  .sci-hero-lead,
+  .sci-hero-bio p,
+  .sci-hero-btn,
+  .sci-hero-breadcrumb {
+    animation: none;
+  }
+}
