@@ -115,49 +115,86 @@ export async function validateUrls(items, config, logger) {
 /**
  * 等待 Cloudflare Pages 部署生效。
  * 判据：线上 HTML 的内容指纹与仓库中对应文件一致。
- * 超时后走兜底延时，保证流程不中断。
+ *
+ * 两个已核实的现实约束：
+ *  1) Cloudflare 会改写部分页面内容（如 contact 页的邮箱地址混淆会注入
+ *     cdn-cgi/email-protection 标记），这类页面的指纹永远无法与仓库文件一致，
+ *     必须通过 liveCheck.ignoreUrls 排除，否则会拖满整个等待窗口。
+ *  2) 部署在各边缘节点间的传播有延迟，短时间内的不匹配可能只是命中了旧节点。
+ *
+ * 因此采用「收敛即退出」而非「死等到超时」：连续 stagnantLimit 轮没有新增匹配
+ * 就结束等待。指纹校验是尽力而为的增强，真正的提交闸门是随后的线上可达性校验。
  */
 export async function waitForDeployLive(items, config, logger) {
   const lc = config.liveCheck ?? {};
-  if (lc.enabled === false) return { skipped: true, matched: 0, timedOut: [] };
+  if (lc.enabled === false) return { skipped: true, matched: 0, unmatched: [] };
 
-  const tracked = items.filter((item) => item.file && item.signature);
-  const untracked = items.length - tracked.length;
+  const ignored = new Set(lc.ignoreUrls ?? []);
+  const ignoredItems = items.filter((item) => ignored.has(item.url));
+  const tracked = items.filter((item) => item.file && item.signature && !ignored.has(item.url));
+  const untracked = items.length - tracked.length - ignoredItems.length;
+
+  if (ignoredItems.length) {
+    logger.info(`按 ignoreUrls 排除 ${ignoredItems.length} 个页面（线上内容会被 Cloudflare 改写，指纹不可比对）：${ignoredItems.map((i) => i.url).join(', ')}`);
+  }
+  if (untracked > 0) logger.info(`${untracked} 个 URL 无本地文件可比对（来自 sitemap），不参与指纹等待`);
   if (!tracked.length) {
-    logger.info(`无本地文件可比对（${untracked} 个 URL 来自 sitemap），跳过部署等待`);
-    return { skipped: true, matched: 0, timedOut: [] };
+    logger.info('无可比对的页面，跳过部署等待');
+    return { skipped: true, matched: 0, unmatched: [] };
   }
 
-  const deadline = Date.now() + (lc.maxWaitMs ?? 180000);
+  const maxWaitMs = lc.maxWaitMs ?? 120000;
   const pollIntervalMs = lc.pollIntervalMs ?? 10000;
+  const stagnantLimit = Math.max(1, lc.stagnantLimit ?? 3);
+  const deadline = Date.now() + maxWaitMs;
   const pending = new Map(tracked.map((item) => [item.url, item.signature]));
+  const total = pending.size;
 
-  logger.info(`等待部署生效：比对 ${pending.size} 个页面的内容指纹（上限 ${Math.round((lc.maxWaitMs ?? 180000) / 1000)}s）`);
+  logger.info(`等待部署生效：比对 ${total} 个页面的内容指纹（上限 ${Math.round(maxWaitMs / 1000)}s，连续 ${stagnantLimit} 轮无进展则收敛退出）`);
+
+  let bestMatched = 0;
+  let stagnant = 0;
+  let converged = false;
 
   while (pending.size && Date.now() < deadline) {
-    const urls = [...pending.keys()];
-    const checks = await mapLimit(urls, lc.concurrency ?? 6, async (url) => {
+    const checks = await mapLimit([...pending.keys()], lc.concurrency ?? 6, async (url) => {
       const res = await request(url, { method: 'GET', config, timeoutMs: lc.timeoutMs ?? 20000 });
-      if (res.status !== 200 || !res.body) return { url, matched: false };
-      return { url, matched: contentSignature(res.body) === pending.get(url) };
+      if (res.status !== 200 || !res.body) return { url, matched: false, status: res.status };
+      return { url, matched: contentSignature(res.body) === pending.get(url), status: res.status };
     });
+
     for (const check of checks) {
-      if (check.matched) {
-        pending.delete(check.url);
-        logger.ok(`已上线：${check.url}`);
-      }
+      if (check.matched) pending.delete(check.url);
     }
     if (!pending.size) break;
-    logger.info(`仍有 ${pending.size} 个页面未匹配到新内容，${pollIntervalMs}ms 后重试`);
+
+    const matchedNow = total - pending.size;
+    if (matchedNow > bestMatched) {
+      logger.info(`部署推进中：已确认 ${matchedNow}/${total}`);
+      bestMatched = matchedNow;
+      stagnant = 0;
+    } else {
+      stagnant += 1;
+      if (stagnant >= stagnantLimit) {
+        converged = true;
+        break;
+      }
+      logger.info(`本轮无新增匹配（已确认 ${matchedNow}/${total}，第 ${stagnant}/${stagnantLimit} 轮）`);
+    }
     await sleep(pollIntervalMs);
   }
 
-  const timedOut = [...pending.keys()];
-  if (timedOut.length) {
-    const fallback = lc.fallbackDelayMs ?? 20000;
-    logger.warn(`${timedOut.length} 个页面在超时内未确认，兜底等待 ${fallback}ms 后继续（可能受 CDN 缓存或多文件差异影响）`);
-    await sleep(fallback);
+  const unmatched = [...pending.keys()];
+  if (!unmatched.length) {
+    logger.ok(`部署已确认生效：${total} 个页面内容与仓库一致`);
+  } else if (converged) {
+    logger.warn(`${unmatched.length}/${total} 个页面未匹配到仓库内容，已收敛退出（不再等待）。后续线上校验仍会拦住不可达地址。`);
+  } else {
+    logger.warn(`${unmatched.length}/${total} 个页面在 ${Math.round(maxWaitMs / 1000)}s 内未确认，继续后续流程。`);
   }
 
-  return { skipped: false, matched: tracked.length - timedOut.length, timedOut };
+  const fallback = lc.fallbackDelayMs ?? 0;
+  if (unmatched.length && fallback > 0) await sleep(fallback);
+
+  return { skipped: false, converged, matched: total - unmatched.length, total, unmatched };
 }

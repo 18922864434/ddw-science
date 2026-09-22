@@ -17,7 +17,7 @@
 | 增量触发 | `push` 到 master，基于 `git diff` + `sitemap lastmod` |
 | 去重 | URL 归一化（剥离 `.html`、丢弃查询串、排序）→ Set 合并 → 状态文件 TTL 窗口 |
 | 重试 | 429 / 5xx / 网络异常指数退避（5 次、上限 30s、含抖动、尊重 `Retry-After`）；400/403/422 不重试 |
-| 落地状态 | 工具链已实现并通过 dry-run 实测；**上线前需先修 1 项 P0 缺陷**（见 §12.1） |
+| 落地状态 | **已上线**。canonical / sitemap / llms.txt 修正已部署生效；工具链已完成首次真实全量推送（`api.indexnow.org` 返回 200，27 个 URL 全部提交） |
 
 ---
 
@@ -31,7 +31,7 @@
 | `https://ddw-science.com/scientist.html` | `308` → `/scientist` | 提交 `.html` 地址会被跳转，属于无效提交 |
 | `https://ddw-science.com/videos.html?c=icdd-lectures` | `308` → `/videos?c=icdd-lectures` | 参数变体与主文档同源 |
 | `sitemap.xml` 的 URL 形态 | 无扩展名（`/scientist`） | sitemap 形态正确，可直接作为 URL 源头 |
-| 26 个页面的 `canonical` | 指向 `*.html`（会被 308） | **P0 缺陷**，见 §12.1 |
+| 26 个页面的 `canonical`（及同类自引用共 140 处） | 原指向 `*.html`（会被 308），已改为无扩展名并上线 | 见 §12.1（已修复） |
 | `videos.js` 的 `?c=` / `?v=` | 纯前端 `location.search` 过滤，同一份 HTML | 参数变体不产生可索引的独立内容，不应单独提交 |
 | `Server` / `Cache-Control` | `cloudflare` / `public, max-age=0, must-revalidate` | 特征符合 Cloudflare Pages，部署为异步构建 |
 | `robots.txt` | 已放行全部主流爬虫，含 `GPTBot`、`PerplexityBot`、`CCBot`、`anthropic-ai` | 抓取许可已就绪，无需改动 |
@@ -179,7 +179,7 @@
 1. **密钥预检** — `GET keyLocation`，要求 `200` 且正文（trim 后）与 `key` 完全一致；首次会重试 6 次 × 15s，容忍部署延迟。失败即终止（退出码 1）。
 2. **采集** — 并行读取 sitemap 与扫描站点 HTML。
 3. **归一化 + 去重** — 见 §8。
-4. **等待部署生效** — 对每个有本地文件对应的 URL，比对线上 HTML 的内容指纹（去注释、折叠空白后取 SHA-256）与仓库文件是否一致，全部命中即视为部署完成。默认上限 180s，超时走 20s 兜底延时并告警（不阻断）。
+4. **等待部署生效** — 对每个有本地文件对应的 URL，比对线上 HTML 的内容指纹（去注释、折叠空白后取 SHA-256）与仓库文件是否一致。上限 120s，且采用**收敛即退出**：连续 3 轮无新增匹配就结束等待，不再空耗窗口。`liveCheck.ignoreUrls` 中的页面直接排除（原因见 §12.4）。此步为尽力而为的增强，不阻断流程——真正的提交闸门是下一步的线上可达性校验。
 5. **线上校验** — 逐个 `HEAD`（`405` 时降级 `GET`），手动跟踪跳转：非 200 剔除；发生跳转则用最终地址替换。
 6. **TTL 去重** — 24 小时内已成功提交过的 URL 跳过（`--force` 可绕过）。
 7. **分批提交** — 按 10000 条 / 1 MB 双约束分批，批间隔 1s。
@@ -259,8 +259,8 @@
 
 | 文件 | 改动 | 必要性 |
 | --- | --- | --- |
-| 26 个 HTML 页面的 `canonical` | 去掉 `.html` 后缀，与 308 后的最终 URL 对齐 | **P0**，见 §12.1 |
-| `sitemap.xml` | 两条 `videos.html?c=...` 替换为单条 `/videos`；补全 `lastmod` 维护 | **P1**，见 §12.1 |
+| 26 个 HTML 页面的 `canonical` 及同类自引用 | 去掉 `.html` 后缀，与 308 后的最终 URL 对齐 | 已完成，见 §12.1 |
+| `sitemap.xml` | 两条 `videos.html?c=...` 替换为单条 `/videos` | 见 §12.2（已修复） |
 
 ### 7.3 明确不改动的部分
 
@@ -365,21 +365,36 @@
 
 ## 10. 分步操作步骤
 
-### 阶段一：上线前置修复（P0，必须先做）
+### 阶段一：✅ 已完成 — 上线前置修复（2026-09-22）
 
 > 理由：canonical 指向会被 308 的 `.html` 地址，与 IndexNow 要提交的最终 URL 冲突。不修则索引信号自相矛盾，提交效果打折。
+> 本节保留完整命令，用于将来复现、回滚核查或站点重建。
 
-**步骤 1.1 — 修正 26 个页面的 canonical**
+**步骤 1.1 — 修正自引用 URL（canonical / hreflang / JSON-LD / llms.txt）**
 
 ```bash
 cd /path/to/ddw-science
-grep -rl 'rel="canonical" href="https://ddw-science.com/[^"]*\.html"' --include=*.html . \
-  | while read -r f; do
-      sed -i -E 's#(<link rel="canonical" href="https://ddw-science\.com/[^"]*)\.html"#\1"#' "$f"
-    done
+# 1) 全部 HTML 中的绝对自引用地址（140 处）
+find . -name '*.html' -not -path './.git/*' -print0 \
+  | xargs -0 sed -i -E 's#https://ddw-science\.com/([A-Za-z0-9/_.-]+)\.html#https://ddw-science.com/\1#g'
+# 2) llms.txt 的页面清单
+sed -i -E 's#https://ddw-science\.com/([A-Za-z0-9/_.-]+)\.html#https://ddw-science.com/\1#g' llms.txt
+# 3) 相对链接中的 .html（如 conferences.html 指向 videos）
+sed -i -E 's#href="videos\.html\?#href="videos?#g' conferences.html
+# 4) 关键：sed 会把 CRLF 改写成 LF，必须按原始行尾还原，否则整文件被判定为重写
+python - <<'PY'
+import subprocess, pathlib
+for name in subprocess.run(['git','diff','--name-only'],capture_output=True,text=True).stdout.split():
+    p = pathlib.Path(name)
+    if not p.exists(): continue
+    head = subprocess.run(['git','show',f'HEAD:{name}'],capture_output=True).stdout
+    crlf = head.count(b'\r\n'); lf = head.count(b'\n') - crlf
+    target = b'\r\n' if crlf > lf else b'\n'
+    p.write_bytes(p.read_bytes().replace(b'\r\n', b'\n').replace(b'\n', target))
+PY
 ```
 
-校验：`grep -rho '<link rel="canonical" href="[^"]*"' --include=*.html . | grep '\.html"' | wc -l` 应输出 `0`。
+校验：`grep -rho '<link rel="canonical" href="[^"]*"' --include=*.html . | grep -c '\.html"'` 应输出 `0`；且 `git diff --shortstat` 的变更行数应与改动处数量级一致（而非整文件行数）。
 
 **步骤 1.2 — 修正 sitemap 的 videos 条目**
 
@@ -396,7 +411,7 @@ grep -rl 'rel="canonical" href="https://ddw-science.com/[^"]*\.html"' --include=
 <url><loc>https://ddw-science.com/videos</loc><lastmod>2026-08-31</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 ```
 
-### 阶段二：部署密钥与工具链
+### 阶段二：✅ 已完成 — 部署密钥与工具链（2026-09-22）
 
 **步骤 2.1** — 确认以下文件已就位（已由本次工作创建）：`5c3ba58f7e6bfd43cda9374ce850898a.txt`、`tools/indexnow/**`、`.github/workflows/indexnow.yml`
 
@@ -417,7 +432,7 @@ curl -s https://ddw-science.com/5c3ba58f7e6bfd43cda9374ce850898a.txt
 
 > 注意：本次推送会触发 workflow，但此时密钥文件可能尚未部署完成。工具已内置 6×15s 的重试容忍；若仍失败，重新触发一次即可。
 
-### 阶段三：首次全量推送
+### 阶段三：✅ 已完成 — 首次全量推送（2026-09-22）
 
 **步骤 3.1 — 本地 dry-run 复核**（不产生外部提交）
 
@@ -437,7 +452,7 @@ node tools/indexnow/cli.mjs --full
 
 **步骤 3.3 — 核对结果**：控制台应出现 `api.indexnow.org 返回 200`；退出码为 `0`。
 
-### 阶段四：启用增量推送
+### 阶段四：✅ 已启用 — 增量推送
 
 **步骤 4.1** — 增量随 `push` 自动触发，无需额外配置。验证方式：修改任一页面 → `git push` → Actions 中应出现一条成功运行，日志显示 `git 增量范围 <before>..<sha>：变更文件 N 个`。
 
@@ -486,32 +501,67 @@ node tools/indexnow/cli.mjs --full --no-live-check
 
 ## 12. 已知风险与待确认项
 
-### 12.1 P0 — canonical 与 308 跳转冲突
+### 12.1 ✅ 已修复 — canonical 与 308 跳转冲突
 
 **现象**：26 个页面的 `<link rel="canonical">` 指向 `*.html`，而线上该地址会 308 跳转到无扩展名地址。
 
 **影响**：Google 与 Bing 看到「canonical 指向一个会重定向的地址」，产生自相矛盾的规范化信号，可能延迟收录或选错规范页；IndexNow 提交的最终 URL 与页面自报的 canonical 不一致，削弱提交效果。
 
-**修复**：见 §10 步骤 1.1，逐文件替换即可，无副作用（`sitemap.xml` 已是正确形态，可作为对照基准）。
+**处理**：2026-09-22 已修复并上线。范围不止 canonical——同类的自引用地址共 140 处，含 `canonical`、`hreflang alternate`、JSON-LD 面包屑与条目、`llms.txt` 页面清单，全部改为无扩展名形态。校验：线上 `sitemap.xml` 与全站 canonical 完全对齐，均为 27 条。
 
-### 12.2 P1 — sitemap 与站点清单不同步
+> 批量改写注意：仓库内 HTML 使用 **CRLF** 行尾，`sed -i` 会将其改写为 LF，导致整个文件被判定为改重写（实测 `publications.html` 曾产生 788 行 diff）。改动后必须按原始行尾还原，本项目使用的还原方式见 §10 步骤 1.1 之后的说明。
 
-- `/videos` 缺失（sitemap 里只有两个 `?c=` 变体），而它正是 canonical 的目标地址；
-- 站点文件 27 个页面与 sitemap 28 条记录口径不一致。
+### 12.2 ✅ 已修复 — sitemap 与站点清单不同步
 
-**修复**：见 §10 步骤 1.2。并建议把 `lastmod` 纳入日常维护（改页面时同步更新），因为增量推送的兜底分支依赖它。
+**原问题**：`/videos` 缺失（sitemap 里只有两个 `?c=` 变体），而它正是 canonical 的目标地址；站点文件 27 个页面与 sitemap 28 条记录口径不一致。
+
+**处理**：2026-09-22 已修复并上线。两条 `?c=` 变体合并为单条 `/videos`，现 sitemap 与站点扫描均为 27 条，完全一致。
+
+**仍建议**：把 `lastmod` 纳入日常维护（改页面时同步更新），因为增量推送的兜底分支依赖它。本轮未改动各页面 `lastmod`——canonical 属元数据调整而非内容变更，统一刷新会削弱 `lastmod` 作为信号的可信度。
 
 ### 12.3 待确认项
 
 | 项 | 说明 | 建议 |
 | --- | --- | --- |
 | `papers.json` 中 2 条 `slug` 为空的 2026 年论文 | 尚无对应页面，不在推送范围内 | 待页面创建后由增量推送自动纳入 |
-| Cloudflare Pages 若启用了 HTML 压缩/注入 | 内容指纹比对可能永不匹配，会走 20s 兜底延时 | 观察日志中 `未匹配到新内容` 告警是否持续出现 |
+| ~~Cloudflare 注入导致指纹不匹配~~ | ✅ 已确认并解决：RUM beacon 注入影响全部页面，邮箱混淆影响 `/contact` | 见 §12.4 |
 | `tools/` 目录会被部署到公网 | 工具与状态文件可被匿名访问（不含机密，密钥本就公开） | 如需隐藏，可在 Cloudflare 层对 `/tools/*` 加访问规则 |
 | `master` 分支保护规则 | 若禁止 GitHub Actions 直推，状态回写步骤会失败（提交本身仍成功） | 为该 job 放开 `github-actions[bot]` 直推，或改为只归档 artifact 不回写 |
 | AI 爬虫抓取频率 | IndexNow 不覆盖，无闭环反馈 | 通过 Cloudflare 日志观察 `GPTBot`/`ClaudeBot` 等 UA 的实际抓取频次 |
 
-### 12.4 明确的非目标
+### 12.4 Cloudflare 响应期改写导致内容指纹不可比（已解决）
+
+Cloudflare 会在**响应阶段**改写 HTML，使线上内容与仓库文件不再逐字节相等。实测确认存在两类，机理不同，处理方式也不同。
+
+**（一）Web Analytics / RUM beacon —— 影响全部页面，已通过归一化剥离解决**
+
+当请求携带 HTML `Accept` 头时，Cloudflare 会在 `</body>` 前注入一段 RUM 埋点脚本：
+
+```html
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df..." integrity="sha512-..." data-cf-beacon='{"token":"7d6edd1c16be46e79a96efd11f6b5e76","r":1,"spa":2}' crossorigin="anonymous"></script>
+```
+
+实测数据：带 `Accept: text/html` 请求 `/videos` 返回 **8713** 字节，不带该头返回 **8346** 字节（与仓库文件完全一致），差值 367 字节即这段脚本。
+
+**根因定位过程值得记录**：同一 URL，用默认头请求指纹一致、用 HTML `Accept` 头请求指纹不符——这说明差异既不在 CDN 缓存、也不在部署延迟，而在服务端的内容协商行为。因此没有采用「换个请求头绕过去」这种依赖 Cloudflare 隐式行为的做法，而是在内容指纹归一化阶段按域名与 `data-cf-beacon` 属性剥离该脚本。注意其 `src` 路径含构建版本号（`/v31edd6df...`）、`integrity` 随版本变化，**不能按完整字符串匹配**，否则下次 CF 更新版本即失效。
+
+**（二）邮箱地址混淆 —— 仅影响含邮箱的页面，已通过 ignoreUrls 排除**
+
+`/contact` 带 Accept 头时线上 **12138** 字节、仓库文件 **11759** 字节。Cloudflare 把 `info@hyd.hu`、`china-contact@ddw-science.com` 改写为 CDN 的 `email-protection` 形式并注入解码脚本——这是**正文内容的就地改写**，剥离注入脚本无法还原，因此将 `https://ddw-science.com/contact` 列入 `liveCheck.ignoreUrls`。若后续新增含邮箱的页面并出现同样症状，追加到同一数组即可。
+
+**为什么不直接关闭这两个 Cloudflare 功能**：RUM 埋点与邮箱混淆都是 Cloudflare 侧的既有线上行为，关闭等于改变站点对外契约与数据采集，不应由本工具单方面决定。归一化剥离 + 忽略清单是成本更低的正确解法。
+
+**修复结果**：`等待部署生效` 从「26 个页面连续 12 轮全部未匹配、空耗 180s」变为「**26/26 在 1.6s 内确认**」。
+
+### 12.5 部署在边缘节点间的传播延迟
+
+**这是设计层面的考量，不是已观测到故障的原因。** Cloudflare Pages 的部署在各 colo 间异步传播，理论上存在「push 后部分节点仍在返回旧内容」的窗口，因此 `等待部署生效` 这一步有必要保留。
+
+**注意不要误归因**：首次全量推送时观察到的「27 个页面连续 12 轮全部未匹配」，经逐层定位后确认由 §12.4 的 RUM beacon 注入造成——属于**确定性**的不匹配，与传播延迟无关。排除该因素后，同一批页面在 1.6s 内全部确认。这一点有实践意义：若当时按「传播延迟」去处理（例如单纯延长等待、增加重试次数），问题永远不会被解决，只会把无效等待拉得更长。
+
+**仍保留的防护**：把「死等到超时」改为**收敛即退出**——连续 3 轮无新增匹配即结束等待（`liveCheck.stagnantLimit`），最坏情况下的空耗从约 180s 降到约 40s。等待本身不承担正确性：真正的提交闸门是随后的线上可达性校验（非 200 一律剔除）。这与「指纹校验只是尽力而为的增强」这一定位一致。
+
+### 12.6 明确的非目标
 
 - 不实现 Google 侧索引提交（无可用接口，需人工用 Search Console）。
 - 不实现站内链接爬取发现新页面（sitemap + 文件扫描已覆盖全部场景）。

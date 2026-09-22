@@ -26,6 +26,13 @@
 - 提交前置：必须 `--verify-key` 通过（keyLocation 可公开访问且内容一致），否则直接退出码 1
 - 能力边界：IndexNow 覆盖 Bing/Yandex/Seznam/Naver/Yep，**不覆盖 Google**；GPTBot/ClaudeBot 等 AI 爬虫不消费该协议
 
+## Cloudflare 响应期改写（做内容比对时必须知道）
+- **RUM beacon 注入**：请求带 HTML `Accept` 头时，CF 会在 `</body>` 前注入 `static.cloudflareinsights.com/beacon.min.js`（实测 `/videos`: 8713 vs 8346 字节，差 367 字节）。不带该头则不注入。任何"线上内容 vs 仓库文件"的比对都必须先剥离它，否则全部页面确定性不匹配
+- **邮箱地址混淆**：`/contact` 的 `info@hyd.hu`、`china-contact@ddw-science.com` 被就地改写为 `email-protection` 形式（12138 vs 11759 字节），无法通过剥离还原
+- 两者均为 CF 侧既有行为，不应为了工具便利去关闭；正确做法是归一化剥离 + 忽略清单（`liveCheck.ignoreUrls`）
+- 定位手法：同一 URL 换请求头后结果由不符变相符 → 先排除缓存与部署延迟，再看服务端内容协商
+
 ## 工作习惯
 - 站点改动以精修单个页面为主（文案、SEO、结构化数据），commit message 多为日期式短描述
 - 改动前后需在线核实（`curl` 验证状态码与响应头），不依赖推断
+- ⚠️ 批量改写 HTML 前先确认行尾符：本仓库 HTML 为 **CRLF**，`sed -i` 会改写成 LF 造成整文件 diff，必须按 HEAD 原始行尾还原

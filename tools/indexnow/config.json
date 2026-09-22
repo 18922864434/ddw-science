@@ -57,11 +57,15 @@
   "liveCheck": {
     "enabled": true,
     "validateBeforeSubmit": true,
-    "maxWaitMs": 180000,
+    "maxWaitMs": 120000,
     "pollIntervalMs": 10000,
-    "fallbackDelayMs": 20000,
+    "stagnantLimit": 3,
+    "fallbackDelayMs": 0,
     "concurrency": 6,
-    "timeoutMs": 20000
+    "timeoutMs": 20000,
+    "ignoreUrls": [
+      "https://ddw-science.com/contact"
+    ]
   },
   "statePath": "tools/indexnow/state.json",
   "logDir": "tools/indexnow/logs"

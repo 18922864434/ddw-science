@@ -13,10 +13,24 @@ export function sha256(input) {
   return createHash('sha256').update(String(input), 'utf8').digest('hex');
 }
 
-/** 归一化 HTML 内容指纹：忽略换行差异、注释与连续空白，用于判断"新版本是否已上线"。 */
+/**
+ * 归一化 HTML 内容指纹：忽略换行差异、注释与连续空白，用于判断"新版本是否已上线"。
+ *
+ * 关键：必须先剥离 Cloudflare 在响应期注入的内容，否则线上指纹永远无法与仓库文件一致。
+ * 已实测确认的注入物（仅在请求带 HTML Accept 头时出现）：
+ *   - Web Analytics / RUM beacon：
+ *     <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vXXXX..."
+ *      integrity="sha512-..." data-cf-beacon='{"token":"..."}'></script>
+ *     注意其 src 路径带构建版本号、integrity 随版本变化，因此按域名与 data-cf-beacon 属性匹配。
+ *   - 邮箱地址混淆解码头：/cdn-cgi/... 脚本
+ * 本函数对仓库文件与线上内容对称调用，仓库文件不含上述片段时该步为无操作。
+ */
+const CF_INJECTED_SCRIPT = /<script\b[^>]*(?:cloudflareinsights\.com|data-cf-beacon|\/cdn-cgi\/)[^>]*>\s*<\/script>/gi;
+
 export function contentSignature(html) {
   const normalized = String(html)
     .replace(/\r\n?/g, '\n')
+    .replace(CF_INJECTED_SCRIPT, '')
     .replace(/<!--[\s\S]*?-->/g, '')
     .replace(/[ \t\f\v]+/g, ' ')
     .replace(/\s*\n\s*/g, '\n')
