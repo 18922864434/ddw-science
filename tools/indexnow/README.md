@@ -17,7 +17,7 @@
 | 增量触发 | `push` 到 master，基于 `git diff` + `sitemap lastmod` |
 | 去重 | URL 归一化（剥离 `.html`、丢弃查询串、排序）→ Set 合并 → 状态文件 TTL 窗口 |
 | 重试 | 429 / 5xx / 网络异常指数退避（5 次、上限 30s、含抖动、尊重 `Retry-After`）；400/403/422 不重试 |
-| 落地状态 | **已上线**。canonical / sitemap / llms.txt 修正已部署生效；工具链已完成首次真实全量推送（`api.indexnow.org` 返回 200，27 个 URL 全部提交） |
+| 落地状态 | **已上线**。canonical / sitemap / llms.txt 修正与 693 处站内相对链接统一均已部署生效（线上链接实测零重定向）；工具链已完成多轮真实推送，`api.indexnow.org` 返回 **200**，27 个 URL 全部提交 |
 
 ---
 
@@ -243,6 +243,7 @@
 | 文件 | 职责 |
 | --- | --- |
 | `<key>.txt` | IndexNow 归属校验文件，必须位于站点根目录且公开可读 |
+| `BingSiteAuth.xml` | Bing Webmaster Tools 站点验证文件，同样位于站点根目录（Bing 会逐字节比对，不可改动内容） |
 | `tools/indexnow/config.json` | 唯一配置入口：host、origin、key、keyLocation、端点、批量与重试策略、去重与排除规则 |
 | `tools/indexnow/cli.mjs` | 命令行编排：参数解析、模式分派、管线串联、退出码与报告 |
 | `tools/indexnow/lib/urls.mjs` | URL 归一化、排除判定、文件↔URL 双向映射、sitemap 解析、`git diff` 增量采集 |
@@ -252,6 +253,7 @@
 | `tools/indexnow/lib/util.mjs` | SHA-256、内容指纹、同步日志器、指数退避与 `Retry-After` 解析、并发受限映射 |
 | `tools/indexnow/state.json` | 提交状态存储，格式 `{ version, updatedAt, urls: { url: {...} } }` |
 | `tools/indexnow/logs/` | JSONL 逐条日志 + JSON 报告。**已加入 `.gitignore`，不入库**：仅作为 CI artifact 归档 30 天，避免公网部署与额外的 Cloudflare 构建 |
+| `tools/indexnow/linkcheck.mjs` | 站内链接守卫：确认站内链接不指向会被 308 跳转的 `.html` 地址。支持静态解析与 `--live` 线上逐链实测 |
 | `.gitignore` | 排除运行日志目录 |
 | `.github/workflows/indexnow.yml` | 触发编排：push 增量、手动全量、每周兜底、状态回写、报告归档 |
 
@@ -261,6 +263,8 @@
 | --- | --- | --- |
 | 26 个 HTML 页面的 `canonical` 及同类自引用 | 去掉 `.html` 后缀，与 308 后的最终 URL 对齐 | 已完成，见 §12.1 |
 | `sitemap.xml` | 两条 `videos.html?c=...` 替换为单条 `/videos` | 见 §12.2（已修复） |
+| 28 个 HTML 文件的 693 处站内相对链接 | 统一改为无扩展名：`index.html`→`./`、`../index.html`→`../`，其余直接去后缀 | 已完成，见 §12.1 |
+| `assets/js/videos.js` | 运行时拼接的合集切换链接 `videos.html?c=` → `videos?c=`（该处在 HTML 之外，纯文本检索无法覆盖） | 已完成 |
 
 ### 7.3 明确不改动的部分
 
@@ -508,6 +512,19 @@ node tools/indexnow/cli.mjs --full --no-live-check
 **影响**：Google 与 Bing 看到「canonical 指向一个会重定向的地址」，产生自相矛盾的规范化信号，可能延迟收录或选错规范页；IndexNow 提交的最终 URL 与页面自报的 canonical 不一致，削弱提交效果。
 
 **处理**：2026-09-22 已修复并上线。范围不止 canonical——同类的自引用地址共 140 处，含 `canonical`、`hreflang alternate`、JSON-LD 面包屑与条目、`llms.txt` 页面清单，全部改为无扩展名形态。校验：线上 `sitemap.xml` 与全站 canonical 完全对齐，均为 27 条。
+
+**同类问题（第二轮）— 站内相对链接**：导航与正文里另有 **693 处相对链接**指向 `*.html`（如 `href="../publications.html"`、`href="index.html"`），意味着用户每次点击都要多走一次 308 跳转。已统一改为无扩展名形态：`index.html` → `./`、`../index.html` → `../`、其余直接去后缀。
+
+其中 **`assets/js/videos.js` 的合集切换链接是运行时用 JS 拼接的**（`'<a href="videos.html?c=' + ... `），纯文本检索 HTML 无法覆盖，靠全站 JS 审计才捞出来——这类"代码生成链接"是链接检查最容易漏的盲区。
+
+同时新增 `tools/indexnow/linkcheck.mjs` 把这条不变量固化为可复跑检查，避免后续编辑又改回带后缀形式：
+
+```bash
+node tools/indexnow/linkcheck.mjs          # 静态解析（无需联网）
+node tools/indexnow/linkcheck.mjs --live   # 线上逐链实测状态码
+```
+
+线上实测结果：**61 个站内链接目标全部 200，零重定向**。（检查会跳过 Cloudflare 注入的 `/cdn-cgi/l/email-protection#...` 链接——`#` 之后是 URL 片段，服务端只看到路径、必然 404，其解码由 CF 的 `email-decode.min.js` 在浏览器端完成，不是站点自身链接。）
 
 > 批量改写注意：仓库内 HTML 使用 **CRLF** 行尾，`sed -i` 会将其改写为 LF，导致整个文件被判定为改重写（实测 `publications.html` 曾产生 788 行 diff）。改动后必须按原始行尾还原，本项目使用的还原方式见 §10 步骤 1.1 之后的说明。
 

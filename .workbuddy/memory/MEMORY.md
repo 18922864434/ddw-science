@@ -7,12 +7,15 @@
 - `papers/` 为论文详情页，列表数据源为 `papers.json`（`slug` 为空表示暂无详情页）
 - 页面体量 13–54 KB，纯静态，仅依赖 jQuery + Bootstrap + video.js
 - `robots.txt` 已放行 GPTBot / PerplexityBot / CCBot / anthropic-ai / Bytespider / Googlebot；站点已有 `llms.txt`
+- 站点根目录另有两个校验文件：IndexNow 密钥 `.txt`、`BingSiteAuth.xml`（Bing Webmaster Tools 验证，用户 hash `DAAD366E6BEA97ACDDA9B37FC21D6300`，Bing 会逐字节比对，勿改动内容）
+- 部署后验证方式：`curl -s -o /dev/null -w '%{http_code}' https://ddw-science.com/<文件名>`，约 20–60s 生效
 
 ## URL 规范约定（重要）
 - 站内规范 URL 一律**无扩展名、无尾斜杠**（根路径除外）、不带查询串
 - 新增页面时必须同步更新 `sitemap.xml`
 - ✅ 2026-09-22 已修复：canonical / hreflang / JSON-LD 自引用 / `llms.txt` 中的 `*.html` 全部去掉后缀（140 处），sitemap 中两条 `videos.html?c=` 合并为单条 `/videos`。sitemap 与 canonical 现已完全对齐（27 = 27）
-- ⚠️ 未处理：站内约 670 处**相对导航链接**仍指向 `*.html`（如 `href="../publications.html"`），每次点击都会经一次 308。属独立优化项，待确认后统一改为无扩展名
+- ✅ 2026-09-22 已修复：站内 **693 处相对链接**统一为无扩展名（`index.html`→`./`、`../index.html`→`../`）。含 `assets/js/videos.js` 中**运行时 JS 拼接**的合集切换链接——该处在 HTML 之外，纯文本检索必漏，需审计自定义 JS。线上实测 61 个站内目标零重定向
+- 守卫工具 `tools/indexnow/linkcheck.mjs`：`--live` 可线上逐链实测状态码，用于防止改回带后缀形式
 - `videos.js` 的 `?c=` / `?v=` 是纯前端过滤，不产生独立可索引内容，canonical 统一为 `/videos`
 - 批量改写 HTML 时注意：仓库内 HTML 为 **CRLF** 行尾，`sed -i` 会改写成 LF 导致整文件 diff。改完须按原始行尾还原
 
