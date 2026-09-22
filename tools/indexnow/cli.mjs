@@ -175,11 +175,13 @@ async function main() {
   let valid = collected;
   let dropped = [];
   let replaced = [];
+  let transient = [];
   if (!skipLive) {
     const result = await validateUrls(collected, config, logger);
     valid = result.items;
     dropped = result.dropped;
     replaced = result.replaced;
+    transient = result.transient;
   } else {
     logger.info('[跳过] 线上可达性校验');
   }
@@ -201,7 +203,7 @@ async function main() {
 
   if (!finalItems.length) {
     logger.ok('本次无需提交（全部命中去重窗口）。');
-    const report = buildReport({ args, detail, collected, dropped, replaced, skipped, summary: null, liveResult });
+    const report = buildReport({ args, detail, collected, dropped, replaced, transient, skipped, summary: null, liveResult });
     await emitReport(args, report);
     return 0;
   }
@@ -215,12 +217,12 @@ async function main() {
   pruneState(state, config.dedupe?.pruneAfterDays ?? 90);
   if (!dryRun) await saveState(path.resolve(ROOT, config.statePath), state);
 
-  const report = buildReport({ args, detail, collected, dropped, replaced, skipped, summary, liveResult });
+  const report = buildReport({ args, detail, collected, dropped, replaced, transient, skipped, summary, liveResult });
   await emitReport(args, report);
 
   // ---------- 收尾 ----------
   logger.step(
-    `完成：提交成功 ${summary.submitted.length}，失败 ${summary.failed.length}，剔除 ${dropped.length}，去重跳过 ${skipped.length}`,
+    `完成：提交成功 ${summary.submitted.length}，失败 ${summary.failed.length}，确定剔除 ${dropped.length}，保留待观察 ${transient.length}，去重跳过 ${skipped.length}`,
   );
 
   if (summary.fatal) {
@@ -234,7 +236,7 @@ async function main() {
   return 0;
 }
 
-function buildReport({ args, detail, collected, dropped, replaced, skipped, summary, liveResult }) {
+function buildReport({ args, detail, collected, dropped, replaced, transient, skipped, summary, liveResult }) {
   return {
     generatedAt: new Date().toISOString(),
     mode: args.mode,
@@ -246,11 +248,13 @@ function buildReport({ args, detail, collected, dropped, replaced, skipped, summ
       failed: summary?.failed.length ?? 0,
       dropped: dropped.length,
       replaced: replaced.length,
+      transient: transient.length,
       deduped: skipped.length,
     },
     liveCheck: liveResult,
     dropped,
     replaced,
+    transient,
     skipped,
     batches: summary?.batches?.map(({ urls, ...rest }) => ({ ...rest, sample: urls.slice(0, 5) })) ?? [],
     failedUrls: summary?.failed ?? [],

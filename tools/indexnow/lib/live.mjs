@@ -74,12 +74,17 @@ export async function resolveFinal(url, config, { timeoutMs = 20000 } = {}) {
 }
 
 /**
- * 提交前校验：剔除死链，纠正重定向地址。
- * 返回 { items, dropped, replaced }。
+ * 提交前校验：剔除确定已失效的地址，纠正重定向地址。
+ * 返回 { items, dropped, replaced, transient }。
+ *
+ * 剔除口径刻意收窄：只有 4xx 才构成「页面不存在」的证据，予以剔除；
+ * 网络异常（status 0，超时/连接失败）与 5xx 属传输层或服务端的瞬时问题，
+ * 不能据此判定 URL 失效——若一并剔除，会在部署抖动时静默漏推页面。
+ * 该口径来自一次 CI 实测：首次推送因探测超时把 27 个 URL 中的 1 个静默丢弃。
  */
 export async function validateUrls(items, config, logger) {
   const lc = config.liveCheck ?? {};
-  if (lc.validateBeforeSubmit === false) return { items, dropped: [], replaced: [] };
+  if (lc.validateBeforeSubmit === false) return { items, dropped: [], replaced: [], transient: [] };
 
   const results = await mapLimit(items, lc.concurrency ?? 6, async (item) => ({
     item,
@@ -89,6 +94,7 @@ export async function validateUrls(items, config, logger) {
   const kept = [];
   const dropped = [];
   const replaced = [];
+  const transient = [];
 
   for (const { item, result } of results) {
     if (result.ok && result.final === item.url) {
@@ -97,7 +103,15 @@ export async function validateUrls(items, config, logger) {
       replaced.push({ from: item.url, to: result.final, chain: result.chain });
       kept.push({ ...item, url: result.final });
     } else {
-      dropped.push({ url: item.url, status: result.status ?? 0, reason: result.reason ?? result.error ?? 'not-200' });
+      const status = result.status ?? 0;
+      const reason = result.reason ?? result.error ?? 'not-200';
+      if (status >= 400 && status < 500) {
+        dropped.push({ url: item.url, status, reason });
+      } else {
+        // 传输层/服务端瞬时问题：保留并告警，交由引擎侧自行判定
+        transient.push({ url: item.url, status, reason });
+        kept.push(item);
+      }
     }
   }
 
@@ -105,11 +119,14 @@ export async function validateUrls(items, config, logger) {
     for (const r of replaced) logger.warn(`重定向已纠正：${r.from} → ${r.to}`);
   }
   if (dropped.length) {
-    for (const d of dropped) logger.warn(`已剔除不可提交 URL：${d.url}（${d.status} ${d.reason}）`);
+    for (const d of dropped) logger.warn(`已剔除确定失效的 URL：${d.url}（${d.status} ${d.reason}）`);
   }
-  logger.info(`线上校验：可提交 ${kept.length} / 剔除 ${dropped.length} / 纠正 ${replaced.length}`);
+  if (transient.length) {
+    for (const t of transient) logger.warn(`探测未成功但非明确失效，予以保留：${t.url}（${t.status} ${t.reason}）`);
+  }
+  logger.info(`线上校验：可提交 ${kept.length} / 确定剔除 ${dropped.length} / 纠正 ${replaced.length} / 保留待观察 ${transient.length}`);
 
-  return { items: kept, dropped, replaced };
+  return { items: kept, dropped, replaced, transient };
 }
 
 /**
