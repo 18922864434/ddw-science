@@ -1,0 +1,96 @@
+name: IndexNow 推送
+
+# 触发设计：
+#   push      → 增量推送。以 event.before..event.sha 的 git 差异为主信号，
+#               叠加 sitemap lastmod 变化，只提交真正变动过的 URL。
+#   schedule  → 每周一 09:00（北京时间）全量兜底，防止增量链路静默失效。
+#   dispatch  → 手动触发，可在 changed / full 之间选择。
+#
+# 说明：状态回写提交由 GITHUB_TOKEN 完成，GitHub 不会为其再次触发 workflow，
+# 因此不存在自触发循环；paths-ignore 作为第二重保险。
+
+on:
+  push:
+    branches: [master]
+    paths-ignore:
+      - 'tools/indexnow/state.json'
+      - '**/*.md'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 推送模式
+        type: choice
+        options: [changed, full]
+        default: changed
+      force:
+        description: 忽略去重 TTL，强制重推
+        type: boolean
+        default: false
+  schedule:
+    - cron: '0 1 * * 1'
+
+concurrency:
+  group: indexnow-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出仓库（完整历史，供增量 diff 使用）
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 安装 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: 解析推送模式与参数
+        id: plan
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            ARGS="--full"
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            ARGS="--${{ inputs.mode }}"
+            if [ "${{ inputs.force }}" = "true" ]; then ARGS="$ARGS --force"; fi
+          else
+            ARGS="--changed --base ${{ github.event.before }} --head ${{ github.sha }}"
+          fi
+          echo "args=$ARGS" >> "$GITHUB_OUTPUT"
+          echo "本次参数：$ARGS"
+
+      - name: 密钥预检（keyLocation 必须可公开访问且内容与 key 一致）
+        run: node tools/indexnow/cli.mjs --verify-key
+
+      - name: 执行 IndexNow 提交
+        id: submit
+        run: node tools/indexnow/cli.mjs ${{ steps.plan.outputs.args }}
+
+      - name: 回写提交状态
+        if: always()
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f tools/indexnow/state.json
+          if git diff --cached --quiet; then
+            echo "状态无变化，跳过回写"
+          else
+            git commit -m "chore(indexnow): 更新提交状态 [skip ci]"
+            git push
+          fi
+
+      - name: 归档执行报告
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: indexnow-logs
+          path: tools/indexnow/logs/
+          retention-days: 30
+          if-no-files-found: ignore

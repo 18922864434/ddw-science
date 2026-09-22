@@ -1,0 +1,2 @@
+# IndexNow 运行日志只保留在 CI artifact 中，不入库
+tools/indexnow/logs/

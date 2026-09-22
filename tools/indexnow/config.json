@@ -1,0 +1,68 @@
+{
+  "host": "ddw-science.com",
+  "origin": "https://ddw-science.com",
+  "key": "5c3ba58f7e6bfd43cda9374ce850898a",
+  "keyLocation": "https://ddw-science.com/5c3ba58f7e6bfd43cda9374ce850898a.txt",
+  "endpoint": "https://api.indexnow.org/indexnow",
+  "fallbackEndpoints": [
+    "https://www.bing.com/indexnow"
+  ],
+  "sitemap": "sitemap.xml",
+  "siteRoot": ".",
+  "userAgent": "ddw-science-indexnow/1.0 (+https://ddw-science.com)",
+  "limits": {
+    "maxUrlsPerRequest": 10000,
+    "maxPayloadBytes": 1048576,
+    "batchDelayMs": 1000
+  },
+  "include": {
+    "queryVariants": false
+  },
+  "exclude": {
+    "exact": [
+      "/404"
+    ],
+    "prefixes": [
+      "/admin",
+      "/tmp",
+      "/assets",
+      "/tools"
+    ],
+    "dirs": [
+      ".git",
+      ".github",
+      ".workbuddy",
+      ".zcode",
+      "node_modules",
+      "tools",
+      "assets",
+      "papers/assets"
+    ],
+    "files": [
+      "404.html"
+    ]
+  },
+  "dedupe": {
+    "ttlHours": 24,
+    "pruneAfterDays": 90
+  },
+  "retry": {
+    "maxAttempts": 5,
+    "baseDelayMs": 1000,
+    "maxDelayMs": 30000,
+    "jitterRatio": 0.3,
+    "respectRetryAfter": true,
+    "maxRetryAfterMs": 120000
+  },
+  "liveCheck": {
+    "enabled": true,
+    "validateBeforeSubmit": true,
+    "maxWaitMs": 180000,
+    "pollIntervalMs": 10000,
+    "fallbackDelayMs": 20000,
+    "concurrency": 6,
+    "timeoutMs": 20000
+  },
+  "statePath": "tools/indexnow/state.json",
+  "logDir": "tools/indexnow/logs"
+}
