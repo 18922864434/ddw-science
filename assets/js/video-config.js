@@ -4,7 +4,7 @@
 
    维护方式：
    1) 新增合集：复制下面任意一整块，改掉 id（同时它就是 URL 参数 ?c= 的值），
-      再往 conferences.html 加一个指向 videos.html?c=<id> 的按钮即可。
+      再往 conferences.html 加一个指向 videos?c=<id> 的按钮即可。
    2) 新增视频：往对应合集的 videos 数组里追加一条。
    3) 上线视频：把每条视频的 src 换成真实 MP4 地址、thumb 换成真实缩略图。
 
@@ -14,7 +14,7 @@
    - thumb ：封面缩略图。当前留空 ""，前端用视频 src + #t=0.1 自动渲染第一帧。
    - src 留空时，播放器会显示「视频即将上线」占位层，不会报错
 
-   视频 ID（videos[].id）用于深链分享：videos.html?c=<合集id>&v=<视频id>
+   视频 ID（videos[].id）用于深链分享：videos?c=<合集id>&v=<视频id>
 
    视频源（阿里云 OSS，2026-08-31 迁移）：
    https://ddw-science.oss-cn-shenzhen.aliyuncs.com/

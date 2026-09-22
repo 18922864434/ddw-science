@@ -2,11 +2,11 @@
    DDW 学术站 — 视频合集页逻辑
    依赖：jquery-3.6.0.min.js / video-config.js（提供 window.VIDEO_COLLECTIONS）
 
-   URL 约定：
-     videos.html?c=<合集id>          打开指定合集，默认选中第一个视频
-     videos.html?c=<合集id>&v=<视频id> 深链到指定视频
-     videos.html                     回退到配置中的第一个合集
-     videos.html?c=xxx（不存在）      渲染友好空态
+   URL 约定（站内链接一律无扩展名，带 .html 会被服务器 308 跳转）：
+     videos?c=<合集id>               打开指定合集，默认选中第一个视频
+     videos?c=<合集id>&v=<视频id>     深链到指定视频
+     videos                          回退到配置中的第一个合集
+     videos?c=xxx（不存在）           渲染友好空态
    ============================================================ */
 (function ($) {
   'use strict';
@@ -66,7 +66,7 @@
   $.each(COLLECTIONS, function (key, item) {
     var cls = (key === colId) ? ' class="active"' : '';
     $tabs.append(
-      '<li><a href="videos.html?c=' + encodeURIComponent(key) + '"' + cls + '>' +
+      '<li><a href="videos?c=' + encodeURIComponent(key) + '"' + cls + '>' +
       esc(item.title || key) + '</a></li>'
     );
   });
