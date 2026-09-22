@@ -42,4 +42,5 @@
 ## 工作习惯
 - 站点改动以精修单个页面为主（文案、SEO、结构化数据），commit message 多为日期式短描述
 - 改动前后需在线核实（`curl` 验证状态码与响应头），不依赖推断
+- 本机走 HTTP 代理（`127.0.0.1:7890`），偶发对特定域名 TLS 握手失败、`curl` 返回 **000**。遇到 000 先用 `curl --noproxy '*'`（或 `NO_PROXY=<域名>`）对照再下结论，勿误判为站点故障。Node 的 fetch 同样走该代理（会打印 UNDICI EnvHttpProxyAgent 警告）
 - ⚠️ 批量改写 HTML 前先确认行尾符：本仓库 HTML 为 **CRLF**，`sed -i` 会改写成 LF 造成整文件 diff，必须按 HEAD 原始行尾还原
