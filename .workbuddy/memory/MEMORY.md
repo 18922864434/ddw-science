@@ -26,9 +26,19 @@
 - 2026-09-30 新增：`about-ddw.html` 沸点差 3 处改用 `1.5 ℃`（半角空格 + **U+2103 全角 ℃**），系按用户指定措辞执行
 - → 全站度符号**现已并存两种形态**，属有意为之的差异，非疏漏。若日后做全站规范化，需知晓此处来源
 
-## push 被拒的常态原因
-- 远端常出现 `chore(indexnow): 更新提交状态 [skip ci]`（IndexNow workflow 自动提交 `tools/indexnow/state.json`，`[skip ci]` 不触发重跑）
+## push 被拒的常态原因 ⚠️ 高频
+- 远端常出现 `chore(indexnow): 更新提交状态 [skip ci]`（IndexNow workflow 自动提交 `tools/indexnow/state.json`，`[skip ci]` 不触发重跑）。**每次 push 内容改动后几乎必撞一次**
 - 处理：`git pull --rebase origin master` 后再 push。该 bot 只碰 `state.json`，与内容改动不重叠，不会冲突
+- ✅ 2026-09-30 已配置 `pull.rebase=true`，此后直接 `git pull` 即等价于 `--rebase`
+- ⚠️ 陷阱：在**未设置 `branch.master.remote`/`merge`** 的仓库里，`git pull --rebase origin master` 会报
+  `fatal: Cannot rebase onto multiple branches.` 并**把远端文件直接暂存进索引**（留下误暂存的 `state.json`）。
+  此时不要慌：`git status` 看到 `M tools/indexnow/state.json`，先 `diff` 确认它就是 bot 的那次更新，
+  再 `git checkout -- <file>` 丢弃，然后改用 **`git rebase origin/master`**（显式 upstream，不走 pull）即可。
+  切勿直接 `git commit` 提交这个文件——会与远端 bot 提交重复
+- 排查任意 push 被拒的固定动作：
+  `git fetch origin && git log --oneline HEAD..origin/master && git diff --name-only HEAD...origin/master`
+  （看远端新增了什么、是否与本次改动文件重叠；不重叠即可安全 rebase）
+- ✅ 已配置 `push.default=current`，配合 `branch.master.merge=refs/heads/master`，后续 `git push` 不会再报「无上游」
 
 ## IndexNow 接入（2026-09-22 落地）
 - key `5c3ba58f7e6bfd43cda9374ce850898a`，密钥文件位于仓库根目录同名 `.txt`（32 字节、无换行）
