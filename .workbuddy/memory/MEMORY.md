@@ -6,7 +6,7 @@
 - 可索引页面 27 个：13 个主页面 + 15 个 `papers/*.html` + `/videos`（排除 `404`）
 - `papers/` 为论文详情页，列表数据源为 `papers.json`（`slug` 为空表示暂无详情页）
 - 页面体量 13–54 KB，纯静态，仅依赖 jQuery + Bootstrap + video.js
-- `robots.txt` 已放行 GPTBot / PerplexityBot / CCBot / anthropic-ai / Bytespider / Googlebot；站点已有 `llms.txt`
+- `robots.txt` 已放行 GPTBot / PerplexityBot / CCBot / **ClaudeBot** / Bytespider / Baiduspider / Googlebot；站点已有 `llms.txt`（2026-09-30：`anthropic-ai` 已更正为现行名 `ClaudeBot`）
 - 站点根目录另有两个校验文件：IndexNow 密钥 `.txt`、`BingSiteAuth.xml`（Bing Webmaster Tools 验证，用户 hash `DAAD366E6BEA97ACDDA9B37FC21D6300`，Bing 会逐字节比对，勿改动内容）
 - 部署后验证方式：`curl -s -o /dev/null -w '%{http_code}' https://ddw-science.com/<文件名>`，约 20–60s 生效
 
@@ -18,6 +18,17 @@
 - 守卫工具 `tools/indexnow/linkcheck.mjs`：`--live` 可线上逐链实测状态码，用于防止改回带后缀形式
 - `videos.js` 的 `?c=` / `?v=` 是纯前端过滤，不产生独立可索引内容，canonical 统一为 `/videos`
 - 批量改写 HTML 时注意：仓库内 HTML 为 **CRLF** 行尾，`sed -i` 会改写成 LF 导致整文件 diff。改完须按原始行尾还原
+- `Edit` 工具可正确保留 CRLF，无需事后修复。验证行尾是否被破坏**不要用 `grep -cU $'\r'`**（它统计匹配行数，末尾无换行符时计数虚高 1）；应看 `git diff --numstat` 的新增/删除行数是否极小
+- 区间/范围一律用 en-dash `–`（U+2013），非 hyphen `-`：`75–80`、`25–110`、`118.6–179.3`
+
+## 度符号约定（⚠️ 已不统一，2026-09-30）
+- 站点原有形态：`°C`（U+00B0 + ASCII `C`）。`about-ddw.html` 的 `100°C` 仍为此形态
+- 2026-09-30 新增：`about-ddw.html` 沸点差 3 处改用 `1.5 ℃`（半角空格 + **U+2103 全角 ℃**），系按用户指定措辞执行
+- → 全站度符号**现已并存两种形态**，属有意为之的差异，非疏漏。若日后做全站规范化，需知晓此处来源
+
+## push 被拒的常态原因
+- 远端常出现 `chore(indexnow): 更新提交状态 [skip ci]`（IndexNow workflow 自动提交 `tools/indexnow/state.json`，`[skip ci]` 不触发重跑）
+- 处理：`git pull --rebase origin master` 后再 push。该 bot 只碰 `state.json`，与内容改动不重叠，不会冲突
 
 ## IndexNow 接入（2026-09-22 落地）
 - key `5c3ba58f7e6bfd43cda9374ce850898a`，密钥文件位于仓库根目录同名 `.txt`（32 字节、无换行）
