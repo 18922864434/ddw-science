@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-28T06:25:06.233Z",
+  "updatedAt": "2026-09-30T09:54:04.736Z",
   "urls": {
     "https://ddw-science.com/": {
       "lastSubmittedAt": "2026-09-28T06:25:06.233Z",
@@ -8,9 +8,9 @@
       "count": 3
     },
     "https://ddw-science.com/about-ddw": {
-      "lastSubmittedAt": "2026-09-28T06:25:06.233Z",
+      "lastSubmittedAt": "2026-09-30T09:54:04.736Z",
       "lastStatus": 200,
-      "count": 3
+      "count": 4
     },
     "https://ddw-science.com/applications": {
       "lastSubmittedAt": "2026-09-28T06:25:06.233Z",
@@ -113,9 +113,9 @@
       "count": 3
     },
     "https://ddw-science.com/papers/2025-rwd-2649": {
-      "lastSubmittedAt": "2026-09-28T06:25:06.233Z",
+      "lastSubmittedAt": "2026-09-30T09:54:04.736Z",
       "lastStatus": 200,
-      "count": 3
+      "count": 4
     },
     "https://ddw-science.com/publications": {
       "lastSubmittedAt": "2026-09-28T06:25:06.233Z",
@@ -123,9 +123,9 @@
       "count": 3
     },
     "https://ddw-science.com/research": {
-      "lastSubmittedAt": "2026-09-28T06:25:06.233Z",
+      "lastSubmittedAt": "2026-09-30T09:54:04.736Z",
       "lastStatus": 200,
-      "count": 3
+      "count": 4
     },
     "https://ddw-science.com/scientist": {
       "lastSubmittedAt": "2026-09-28T06:25:06.233Z",
