@@ -1,141 +1,146 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-05T06:37:21.849Z",
+  "updatedAt": "2026-10-12T07:02:33.996Z",
   "urls": {
     "https://ddw-science.com/": {
-      "lastSubmittedAt": "2026-10-05T06:37:21.849Z",
+      "lastSubmittedAt": "2026-10-12T07:02:33.995Z",
       "lastStatus": 200,
-      "count": 4
+      "count": 5
     },
     "https://ddw-science.com/about-ddw": {
-      "lastSubmittedAt": "2026-10-05T06:37:21.849Z",
+      "lastSubmittedAt": "2026-10-12T07:02:33.995Z",
       "lastStatus": 200,
-      "count": 5
+      "count": 6
     },
     "https://ddw-science.com/applications": {
-      "lastSubmittedAt": "2026-10-05T06:37:21.849Z",
+      "lastSubmittedAt": "2026-10-12T07:02:33.995Z",
       "lastStatus": 200,
-      "count": 4
+      "count": 5
     },
     "https://ddw-science.com/books": {
-      "lastSubmittedAt": "2026-10-05T06:37:21.849Z",
+      "lastSubmittedAt": "2026-10-12T07:02:33.995Z",
       "lastStatus": 200,
-      "count": 4
+      "count": 5
     },
     "https://ddw-science.com/conferences": {
-      "lastSubmittedAt": "2026-10-05T06:37:21.849Z",
+      "lastSubmittedAt": "2026-10-12T07:02:33.995Z",
       "lastStatus": 200,
-      "count": 4
+      "count": 5
     },
     "https://ddw-science.com/contact": {
-      "lastSubmittedAt": "2026-10-05T06:37:21.849Z",
+      "lastSubmittedAt": "2026-10-12T07:02:33.995Z",
       "lastStatus": 200,
-      "count": 4
+      "count": 5
     },
     "https://ddw-science.com/eu-project": {
-      "lastSubmittedAt": "2026-10-05T06:37:21.849Z",
+      "lastSubmittedAt": "2026-10-12T07:02:33.995Z",
       "lastStatus": 200,
-      "count": 4
+      "count": 5
     },
     "https://ddw-science.com/experts": {
-      "lastSubmittedAt": "2026-10-05T06:37:21.849Z",
+      "lastSubmittedAt": "2026-10-12T07:02:33.995Z",
       "lastStatus": 200,
-      "count": 4
+      "count": 5
     },
     "https://ddw-science.com/papers/1993-febs-letters": {
-      "lastSubmittedAt": "2026-10-05T06:37:21.849Z",
+      "lastSubmittedAt": "2026-10-12T07:02:33.995Z",
       "lastStatus": 200,
-      "count": 4
+      "count": 5
     },
     "https://ddw-science.com/papers/2005-rowing-athletes": {
-      "lastSubmittedAt": "2026-10-05T06:37:21.849Z",
+      "lastSubmittedAt": "2026-10-12T07:02:33.995Z",
       "lastStatus": 200,
-      "count": 4
+      "count": 5
     },
     "https://ddw-science.com/papers/2011-prostate-rct": {
-      "lastSubmittedAt": "2026-10-05T06:37:21.849Z",
+      "lastSubmittedAt": "2026-10-12T07:02:33.995Z",
       "lastStatus": 200,
-      "count": 4
+      "count": 5
     },
     "https://ddw-science.com/papers/2013-breast-cancer": {
-      "lastSubmittedAt": "2026-10-05T06:37:21.849Z",
+      "lastSubmittedAt": "2026-10-12T07:02:33.995Z",
       "lastStatus": 200,
-      "count": 4
+      "count": 5
     },
     "https://ddw-science.com/papers/2020-metabolic-syndrome": {
-      "lastSubmittedAt": "2026-10-05T06:37:21.849Z",
+      "lastSubmittedAt": "2026-10-12T07:02:33.995Z",
       "lastStatus": 200,
-      "count": 4
+      "count": 5
     },
     "https://ddw-science.com/papers/2021-ecoli-mutation": {
-      "lastSubmittedAt": "2026-10-05T06:37:21.849Z",
+      "lastSubmittedAt": "2026-10-12T07:02:33.995Z",
       "lastStatus": 200,
-      "count": 4
+      "count": 5
     },
     "https://ddw-science.com/papers/2021-glut4-glucose": {
-      "lastSubmittedAt": "2026-10-05T06:37:21.849Z",
+      "lastSubmittedAt": "2026-10-12T07:02:33.995Z",
       "lastStatus": 200,
-      "count": 4
+      "count": 5
     },
     "https://ddw-science.com/papers/2021-lung-cancer": {
-      "lastSubmittedAt": "2026-10-05T06:37:21.849Z",
+      "lastSubmittedAt": "2026-10-12T07:02:33.995Z",
       "lastStatus": 200,
-      "count": 4
+      "count": 5
     },
     "https://ddw-science.com/papers/2021-pancreatic-cancer": {
-      "lastSubmittedAt": "2026-10-05T06:37:21.849Z",
+      "lastSubmittedAt": "2026-10-12T07:02:33.995Z",
       "lastStatus": 200,
-      "count": 4
+      "count": 5
     },
     "https://ddw-science.com/papers/2022-gene-expression": {
-      "lastSubmittedAt": "2026-10-05T06:37:21.849Z",
+      "lastSubmittedAt": "2026-10-12T07:02:33.995Z",
       "lastStatus": 200,
-      "count": 4
+      "count": 5
     },
     "https://ddw-science.com/papers/2023-glioblastoma": {
-      "lastSubmittedAt": "2026-10-05T06:37:21.849Z",
+      "lastSubmittedAt": "2026-10-12T07:02:33.995Z",
       "lastStatus": 200,
-      "count": 4
+      "count": 5
     },
     "https://ddw-science.com/papers/2024-a549-dual": {
-      "lastSubmittedAt": "2026-10-05T06:37:21.849Z",
+      "lastSubmittedAt": "2026-10-12T07:02:33.995Z",
       "lastStatus": 200,
-      "count": 4
+      "count": 5
     },
     "https://ddw-science.com/papers/2024-breath-test": {
-      "lastSubmittedAt": "2026-10-05T06:37:21.849Z",
+      "lastSubmittedAt": "2026-10-12T07:02:33.995Z",
       "lastStatus": 200,
-      "count": 4
+      "count": 5
     },
     "https://ddw-science.com/papers/2024-lung-adenocarcinoma": {
-      "lastSubmittedAt": "2026-10-05T06:37:21.849Z",
+      "lastSubmittedAt": "2026-10-12T07:02:33.995Z",
       "lastStatus": 200,
-      "count": 4
+      "count": 5
     },
     "https://ddw-science.com/papers/2025-rwd-2649": {
-      "lastSubmittedAt": "2026-10-05T06:37:21.849Z",
+      "lastSubmittedAt": "2026-10-12T07:02:33.995Z",
       "lastStatus": 200,
-      "count": 5
+      "count": 6
     },
     "https://ddw-science.com/publications": {
-      "lastSubmittedAt": "2026-10-05T06:37:21.849Z",
-      "lastStatus": 200,
-      "count": 4
-    },
-    "https://ddw-science.com/research": {
-      "lastSubmittedAt": "2026-10-05T06:37:21.849Z",
+      "lastSubmittedAt": "2026-10-12T07:02:33.995Z",
       "lastStatus": 200,
       "count": 5
     },
-    "https://ddw-science.com/scientist": {
-      "lastSubmittedAt": "2026-10-05T06:37:21.849Z",
+    "https://ddw-science.com/research": {
+      "lastSubmittedAt": "2026-10-12T07:02:33.995Z",
       "lastStatus": 200,
-      "count": 4
+      "count": 6
+    },
+    "https://ddw-science.com/scientist": {
+      "lastSubmittedAt": "2026-10-12T07:02:33.995Z",
+      "lastStatus": 200,
+      "count": 5
     },
     "https://ddw-science.com/videos": {
-      "lastSubmittedAt": "2026-10-05T06:37:21.849Z",
+      "lastSubmittedAt": "2026-10-12T07:02:33.995Z",
       "lastStatus": 200,
-      "count": 4
+      "count": 5
+    },
+    "https://ddw-science.com/googleeeb894935fed1c56": {
+      "lastSubmittedAt": "2026-10-12T07:02:33.995Z",
+      "lastStatus": 200,
+      "count": 1
     }
   }
 }
