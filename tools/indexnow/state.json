@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-09T02:17:24.342Z",
+  "updatedAt": "2026-11-09T07:43:09.287Z",
   "urls": {
     "https://ddw-science.com/": {
       "lastSubmittedAt": "2026-11-09T02:17:24.341Z",
@@ -8,14 +8,14 @@
       "count": 9
     },
     "https://ddw-science.com/about-ddw": {
-      "lastSubmittedAt": "2026-11-02T07:25:01.896Z",
+      "lastSubmittedAt": "2026-11-09T07:43:09.287Z",
       "lastStatus": 200,
-      "count": 9
+      "count": 10
     },
     "https://ddw-science.com/applications": {
-      "lastSubmittedAt": "2026-11-02T07:25:01.896Z",
+      "lastSubmittedAt": "2026-11-09T07:43:09.287Z",
       "lastStatus": 200,
-      "count": 8
+      "count": 9
     },
     "https://ddw-science.com/books": {
       "lastSubmittedAt": "2026-11-09T02:17:24.341Z",
@@ -23,24 +23,24 @@
       "count": 9
     },
     "https://ddw-science.com/conferences": {
-      "lastSubmittedAt": "2026-11-02T07:25:01.896Z",
+      "lastSubmittedAt": "2026-11-09T07:43:09.287Z",
       "lastStatus": 200,
-      "count": 8
+      "count": 9
     },
     "https://ddw-science.com/contact": {
-      "lastSubmittedAt": "2026-11-02T07:25:01.896Z",
+      "lastSubmittedAt": "2026-11-09T07:43:09.287Z",
       "lastStatus": 200,
-      "count": 8
+      "count": 9
     },
     "https://ddw-science.com/eu-project": {
-      "lastSubmittedAt": "2026-11-02T07:25:01.896Z",
+      "lastSubmittedAt": "2026-11-09T07:43:09.287Z",
       "lastStatus": 200,
-      "count": 8
+      "count": 9
     },
     "https://ddw-science.com/experts": {
-      "lastSubmittedAt": "2026-11-02T07:25:01.896Z",
+      "lastSubmittedAt": "2026-11-09T07:43:09.287Z",
       "lastStatus": 200,
-      "count": 8
+      "count": 9
     },
     "https://ddw-science.com/papers/1993-febs-letters": {
       "lastSubmittedAt": "2026-11-09T02:17:24.341Z",
@@ -123,24 +123,24 @@
       "count": 9
     },
     "https://ddw-science.com/research": {
-      "lastSubmittedAt": "2026-11-02T07:25:01.896Z",
+      "lastSubmittedAt": "2026-11-09T07:43:09.287Z",
+      "lastStatus": 200,
+      "count": 10
+    },
+    "https://ddw-science.com/scientist": {
+      "lastSubmittedAt": "2026-11-09T07:43:09.287Z",
       "lastStatus": 200,
       "count": 9
     },
-    "https://ddw-science.com/scientist": {
-      "lastSubmittedAt": "2026-11-02T07:25:01.896Z",
-      "lastStatus": 200,
-      "count": 8
-    },
     "https://ddw-science.com/videos": {
-      "lastSubmittedAt": "2026-11-02T07:25:01.896Z",
+      "lastSubmittedAt": "2026-11-09T07:43:09.287Z",
       "lastStatus": 200,
-      "count": 8
+      "count": 9
     },
     "https://ddw-science.com/googleeeb894935fed1c56": {
-      "lastSubmittedAt": "2026-11-02T07:25:01.896Z",
+      "lastSubmittedAt": "2026-11-09T07:43:09.287Z",
       "lastStatus": 200,
-      "count": 4
+      "count": 5
     }
   }
 }
