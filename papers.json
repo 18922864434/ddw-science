@@ -263,6 +263,7 @@
   "authors": "K. Krempels、I. Somlyai、Z. Gyöngyi、I. Ember、K. Balog、O. Abonyi、G. Somlyai",
   "journal": "癌症研究与治疗杂志 2013, 1(8):194-200",
   "cat": "肿瘤生物学",
+  "doi": "10.14312/2052-4994.2013-29",
   "pdf": "assets/pdf/29a46011070ea1b96e20.pdf",
   "slug": "2013-breast-cancer"
  },
@@ -290,6 +291,7 @@
   "authors": "A. Kovács、I. Guller、K. Krempels、I. Somlyai、I. Jánosi、Z. Gyöngyi、I. Szabó、I. Ember、Gábor Somlyai",
   "journal": "癌症治疗杂志 2, 548-556",
   "cat": "肿瘤生物学",
+  "doi": "10.4236/jct.2011.24075",
   "pdf": "assets/pdf/c35c0863f86ee7b6463f.pdf",
   "slug": "2011-prostate-rct"
  },
@@ -344,6 +346,7 @@
   "authors": "Györe I.、Somlyai G.",
   "journal": "匈牙利运动医学评论 46/1:27-38",
   "cat": "运动与体能",
+  "citation": "Györe I., Somlyai G. Hung. Rev. Sports Med. 2005;46(1):27–38",
   "pdf": "assets/pdf/0def63d53f9a83f6c01d.pdf",
   "slug": "2005-rowing-athletes"
  },
@@ -425,6 +428,7 @@
   "authors": "Gábor Somlyai、Gábor Jancsó、György Jákli、Kornélia Vass、Balázs Barna、Viktor Lakics、Tamás Gaál",
   "journal": "FEBS Letters, 317, 1-4",
   "cat": "肿瘤生物学",
+  "doi": "10.1016/0014-5793(93)81479-J",
   "pdf": "assets/pdf/4b880068407281ccd11b.pdf",
   "slug": "1993-febs-letters"
  }
